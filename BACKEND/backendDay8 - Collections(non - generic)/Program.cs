@@ -31,6 +31,40 @@
 
                 return value;
             }
+            public static string CheckString(string prompt)
+            {
+                bool valid = false;
+                string value = "";
+
+                do
+                {
+                    try
+                    {
+                        Console.WriteLine(prompt);
+                        value = Console.ReadLine();
+
+                        if (string.IsNullOrWhiteSpace(value))
+                        {
+                            throw new ArgumentException("Invalid input. It cannot be empty.");
+                        }
+                        //dapat walang number sa name or sa string like sa program
+                        if (value.Any(char.IsDigit))
+                        {
+                            throw new ArgumentException("Invalid input. Name cannot contain numbers.");
+                        }
+
+                        valid = true;
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+
+                } while (!valid);
+
+                return value;
+            }
+
 
             public static int CheckAge(string prompt)//eto naman sa age
             {
@@ -59,11 +93,10 @@
 
                 return value;
             }
-
-            public static string CheckStringInput(string prompt)//eto sa string kung empty ba
+            public static string CheckStudID(string prompt)
             {
-                bool valid = false;
                 string value = "";
+                bool valid = false;
 
                 do
                 {
@@ -71,21 +104,26 @@
                     {
                         Console.WriteLine(prompt);
                         value = Console.ReadLine();
-                        if (string.IsNullOrWhiteSpace(value))
+
+                        //limited to 5 digits lang and dapat numbers lnag siya.
+                        if (string.IsNullOrWhiteSpace(value) || value.Length != 5 || !value.All(char.IsDigit))
                         {
-                            throw new ArgumentException("Name cannot be empty.");
+                            throw new ArgumentException("Invalid Student ID. It must be exactly 5 digits (e.g., 01234).");
                         }
+
                         valid = true;
                     }
-                    catch (Exception ex)
+                    catch (ArgumentException ex)
                     {
-
                         Console.WriteLine(ex.Message);
                     }
+
                 } while (!valid);
 
                 return value;
             }
+
+
 
             public static string ConfirmationInput(string prompt)
             {
@@ -103,7 +141,7 @@
         public class Student
         {
             private string name;
-            private int studID;
+            private string studID;
             private int age;
             private string program;
 
@@ -113,7 +151,7 @@
                 set { name = value; }
             }
 
-            public int StudID
+            public string StudID
             {
                 get { return studID; }
                 set { studID = value; } 
@@ -134,8 +172,10 @@
 
         static void Main(string[] args)
         {
-            string useAgain;
+            string useAgain = "no";
             int operation;
+
+            List<Student> students = new List<Student>();
 
             do
             {
@@ -146,6 +186,19 @@
                 switch (operation)
                 {
                     case 1:
+                        do
+                        {
+                            Student student = new Student();
+                            student.Name = InputHelper.CheckString("Enter student name: ");
+                            student.StudID = InputHelper.CheckStudID("Enter student ID (ex: 00102): ");
+                            student.Age = InputHelper.CheckAge("Enter age (18 - 40): ");
+                            student.Program = InputHelper.CheckString("Enter course/program (ex: BSCS): ");
+
+                            students.Add(student); 
+
+                            Console.Write("Add another student? (yes/no): ");
+                            useAgain = Console.ReadLine()?.Trim().ToLower();
+                        } while (useAgain == "yes");
                         break;
                     case 2:
                         break;
