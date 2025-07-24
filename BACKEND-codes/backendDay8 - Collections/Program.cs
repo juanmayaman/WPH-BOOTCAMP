@@ -179,9 +179,21 @@ namespace backendDay8___Collections_student_management
                 string useAgain = "no";
                 do
                 {
+                    string tempID;
+                    // Check if may kapareha na id
+                    do
+                    {
+                        tempID = InputHelper.CheckStudID("Enter student ID (ex: 00102): ");
+                        if (students.Any(s => s.StudID == tempID))
+                        {
+                            Console.WriteLine("That Student ID already exists. Please enter a different ID.");
+                            tempID = null; // force loop again
+                        }
+                    } while (tempID == null);
+
                     Student student = new Student();
                     student.Name = InputHelper.CheckString("Enter student name: ");
-                    student.StudID = InputHelper.CheckStudID("Enter student ID (ex: 00102): ");
+                    student.StudID = tempID; // already checked above
                     student.Age = InputHelper.CheckAge("Enter age (18 - 40): ");
                     student.Program = InputHelper.CheckString("Enter course/program (ex: BSCS): ").ToUpper();
 
@@ -191,6 +203,7 @@ namespace backendDay8___Collections_student_management
                     useAgain = Console.ReadLine()?.Trim().ToLower();
                 } while (useAgain == "yes");
             }
+
 
             public static void DisplayAllStudents(List<Student> students)
             {
