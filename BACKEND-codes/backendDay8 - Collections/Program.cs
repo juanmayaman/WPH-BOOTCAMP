@@ -131,7 +131,7 @@ namespace backendDay8___Collections_student_management
             {
                 Console.WriteLine(prompt);
                 string value = Console.ReadLine().Trim().ToLower();
-                while(value != "yes" || value != "no")
+                while(value != "yes" && value != "no")
                 {
                     Console.WriteLine($"Invalid input.{prompt}");
                     value = Console.ReadLine().Trim().ToLower();
