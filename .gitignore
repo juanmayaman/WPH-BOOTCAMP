@@ -1,0 +1,20 @@
+# Visual Studio
+.vs/
+*/.vs/
+**/.vs/
+*.user
+*.suo
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+*.exe
+*.dll
+
+# Others
+*.log
+*.cache
+*.pdb
+*.db
+*.DS_Store

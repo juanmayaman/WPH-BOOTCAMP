@@ -1,4 +1,8 @@
-﻿namespace backendDay8___Collections_non___generic_
+﻿using System.Collections.Generic;
+using System.Net.Mail;
+using static backendDay8___Collections_non___generic_.Program;
+
+namespace backendDay8___Collections_non___generic_
 {
     internal class Program
     {
@@ -129,7 +133,7 @@
             {
                 Console.WriteLine(prompt);
                 string value = Console.ReadLine().Trim().ToLower();
-                while(value == "yes" || value == "no")
+                while(value != "yes" || value != "no")
                 {
                     Console.WriteLine($"Invalid input.{prompt}");
                     value = Console.ReadLine().Trim().ToLower();
@@ -170,12 +174,150 @@
             }
         }
 
+        public class ManageStudent
+        {
+            public static void AddStudent(List<Student> students)
+            {
+                string useAgain = "no";
+                do
+                {
+                    Student student = new Student();
+                    student.Name = InputHelper.CheckString("Enter student name: ");
+                    student.StudID = InputHelper.CheckStudID("Enter student ID (ex: 00102): ");
+                    student.Age = InputHelper.CheckAge("Enter age (18 - 40): ");
+                    student.Program = InputHelper.CheckString("Enter course/program (ex: BSCS): ").ToUpper();
+
+                    students.Add(student);
+
+                    Console.Write("Add another student? (yes/no): ");
+                    useAgain = Console.ReadLine()?.Trim().ToLower();
+                } while (useAgain == "yes");
+            }
+
+            public static void DisplayAllStudents(List<Student> students)
+            {
+                if (students.Count == 0)
+                {
+                    Console.WriteLine("No student records found.");
+                    return;
+                }
+
+                Console.WriteLine("\n--- All Student Records ---");
+                foreach (Student student in students)
+                {
+                    Console.WriteLine($"Name: {student.Name}");
+                    Console.WriteLine($"Student ID: {student.StudID}");
+                    Console.WriteLine($"Age: {student.Age}");
+                    Console.WriteLine($"Program: {student.Program}");
+                    Console.WriteLine("---------------------------");
+                }
+            }
+
+            public static void EditStudent(List<Student> students)
+            {
+                string tempID = InputHelper.CheckStudID("Please insert student ID to edit: ");
+                bool found = false;
+
+                foreach (Student student in students)
+                {
+                    if (string.Equals(student.StudID, tempID, StringComparison.OrdinalIgnoreCase))
+                    {
+                        Console.WriteLine("\n--- Current Student Information ---");
+                        Console.WriteLine($"Name: {student.Name}");
+                        Console.WriteLine($"Student ID: {student.StudID}");
+                        Console.WriteLine($"Age: {student.Age}");
+                        Console.WriteLine($"Program: {student.Program}");
+
+                        Console.WriteLine("\n--- Enter New Information ---");
+
+                        student.Name = InputHelper.CheckString("Enter new name: ");
+                        student.Age = InputHelper.CheckAge("Enter new age (18-40): ");
+                        student.Program = InputHelper.CheckString("Enter new program: ").ToUpper();
+
+                        Console.WriteLine("Student information updated successfully.");
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    Console.WriteLine("Student with the given ID was not found.");
+                }
+            }
+
+            public static void DisplayStudent(List<Student> students)
+            {
+                string tempID = InputHelper.CheckStudID("Please insert student ID to display: ");
+                bool found = false;
+
+                foreach (Student student in students)
+                {
+                    if (string.Equals(student.StudID, tempID, StringComparison.OrdinalIgnoreCase))
+                    {
+                        Console.WriteLine("\n--- Current Student Information ---");
+                        Console.WriteLine($"Name: {student.Name}");
+                        Console.WriteLine($"Student ID: {student.StudID}");
+                        Console.WriteLine($"Age: {student.Age}");
+                        Console.WriteLine($"Program: {student.Program}");
+
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    Console.WriteLine("Student with the given ID was not found.");
+                }
+            }
+
+            public static void DeleteStudent(List<Student> students)
+            {
+                string tempID = InputHelper.CheckStudID("Please insert student ID to edit: ");
+                bool found = false;
+                string confirm = "";
+
+                for (int i = 0; i < students.Count; i++)
+                {
+                    if (string.Equals(students[i].StudID, tempID, StringComparison.OrdinalIgnoreCase))
+                    {
+                        Console.WriteLine("\n--- Current Student Information ---");
+                        Console.WriteLine($"Name: {students[i].Name}");
+                        Console.WriteLine($"Student ID: {students[i].StudID}");
+                        Console.WriteLine($"Age: {students[i].Age}");
+                        Console.WriteLine($"Program: {students[i].Program}");
+
+                        confirm = InputHelper.ConfirmationInput("\nDo you want to delete this student?(yes/no): ");
+
+                        if(confirm == "yes")
+                        {
+                            students.RemoveAt(i);
+                            Console.WriteLine("Student removed successfully.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Operation canceled.");
+                        }
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    Console.WriteLine("Student with the given ID was not found.");
+                }
+            }
+
+        }
+
         static void Main(string[] args)
         {
             string useAgain = "no";
             int operation;
 
-            List<Student> students = new List<Student>();
+            List<Student> students = new List<Student>(); //gumamit ng list since di pwedeng array kase fixed sized siya and mas madali mag or delete here
 
             do
             {
@@ -186,27 +328,19 @@
                 switch (operation)
                 {
                     case 1:
-                        do
-                        {
-                            Student student = new Student();
-                            student.Name = InputHelper.CheckString("Enter student name: ");
-                            student.StudID = InputHelper.CheckStudID("Enter student ID (ex: 00102): ");
-                            student.Age = InputHelper.CheckAge("Enter age (18 - 40): ");
-                            student.Program = InputHelper.CheckString("Enter course/program (ex: BSCS): ");
-
-                            students.Add(student); 
-
-                            Console.Write("Add another student? (yes/no): ");
-                            useAgain = Console.ReadLine()?.Trim().ToLower();
-                        } while (useAgain == "yes");
+                        ManageStudent.AddStudent(students);
                         break;
                     case 2:
+                        ManageStudent.DisplayAllStudents(students);
                         break;
                     case 3:
+                        ManageStudent.EditStudent(students);
                         break;
                     case 4:
+                        ManageStudent.DisplayStudent(students);
                         break;
                     case 5:
+                        ManageStudent.DeleteStudent(students);
                         break;
                     case 6:
                         useAgain = InputHelper.ConfirmationInput("Are you sure you want to exit? ('yes' / 'no'): ");
