@@ -15,9 +15,9 @@
                         Console.WriteLine(prompt);
                         string input = Console.ReadLine();
 
-                        if (!int.TryParse(input, out value) || value < 1 || value > 6)
+                        if (!int.TryParse(input, out value) || value < 1 || value > 7)
                         {
-                            throw new ArgumentException("Invalid operation. Must be between 1 and 6");
+                            throw new ArgumentException("Invalid operation. Must be between 1 and 7");
                         }
 
                         valid = true;
@@ -108,7 +108,7 @@
 
             public static void RedoText(Stack<string> history, Stack<string> redo)
             {
-                if(history.Count > 0)
+                if(redo.Count > 0)
                 {
                     string last = redo.Pop();
                     history.Push(last);
@@ -128,7 +128,7 @@
                     return;
                 }
 
-                // Convert to list to show entries with index
+                //coversion from stack to list
                 var historyList = history.Reverse().ToList();
 
                 Console.WriteLine("Select the number of the text you want to delete:");
@@ -153,7 +153,6 @@
                     }
                 } while (!valid);
 
-                // Get the item and delete it
                 string toDelete = historyList[choice - 1];
                 deleted.Add(toDelete);
                 Console.WriteLine($"Deleted: '{toDelete}'");
@@ -209,23 +208,39 @@
 
             do
             {
-                Console.WriteLine("--------\t Student Management System\t--------");
-                Console.WriteLine("1. Add new text \n2. Undoing changes\n3. Redoing changes\n4. Deleting text\n5. Display history \n6. Exit");
-                operation = InputHelper.CheckMenu("Please select an operation (1 - 6): ");
+                Console.WriteLine("--------\t Text Editor System \t--------");
+                Console.WriteLine("1. Add New Text");
+                Console.WriteLine("2. Undo Last Change");
+                Console.WriteLine("3. Redo Last Change");
+                Console.WriteLine("4. Delete a Text");
+                Console.WriteLine("5. Display Deleted Texts");
+                Console.WriteLine("6. Display History");
+                Console.WriteLine("7. Exit");
+
+                operation = InputHelper.CheckMenu("Please select an operation (1 - 7): ");
+
 
                 switch (operation)
                 {
-                    case 1:
+                    case 1://add
+                        TextEditor.AddText(history, redo, deleted);
                         break;
-                    case 2:
+                    case 2://undo
+                        TextEditor.UndoText(history, redo);
                         break;
                     case 3:
+                        TextEditor.RedoText(history, redo);
                         break;
-                    case 4:
+                    case 4://delete text
+                        TextEditor.DeleteText(history, deleted);
                         break;
                     case 5:
+                        TextEditor.ShowDeletedTexts(deleted);
                         break;
                     case 6:
+                        TextEditor.DisplayHistory(history);
+                        break;
+                    case 7:
                         useAgain = InputHelper.ConfirmationInput("Are you sure you want to exit? ('yes' / 'no'): ");
                         break;
                     default:
