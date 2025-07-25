@@ -78,7 +78,7 @@
 
         public class TextEditor
         {
-            public static void AddText(Stack<string> history, Stack<string> redo, List<string> deleted)
+            public static void AddText(Stack<string> history, Stack<string> redo)
             {
                 string useAgain;
                 do
@@ -223,7 +223,7 @@
                 switch (operation)
                 {
                     case 1://add
-                        TextEditor.AddText(history, redo, deleted);
+                        TextEditor.AddText(history, redo);
                         break;
                     case 2://undo
                         TextEditor.UndoText(history, redo);
