@@ -87,17 +87,38 @@ namespace BackendTest
         }
         private int checkwinner(int playerChoice, int cominput) 
         {
+            //1 rock
+            //2 paper
+            //3 scissors
             int p = playerChoice;
             int c = cominput;
-          //1 rock
-          //2 paper
-          //3 scissors
+
+            ShowPicked(p, player.Name);
+            ShowPicked(c, computer.Name);
+            
+
             if((p == 1 && c == 3) || (p == 2 && c == 3) || (p == 3 && c == 2))
             {
-                return -1;
+                return 1;
             }
 
             return -1;
+
+        }
+
+        //added method to show the chocie
+        public static void ShowPicked(int choice, string name)
+        {
+            if(choice == 1)
+            {
+                Console.WriteLine($"{name} picked ROCK!");
+            } else if(choice == 2)
+            {
+                Console.WriteLine($"{name} picked PAPER!");
+            }else if(choice == 3)
+            {
+                Console.WriteLine($"{name} picked SCISSORS!");
+            }
         }
 
     }
