@@ -17,12 +17,11 @@ namespace BackendTest
             Player player = new Player();
             Console.WriteLine("Welcome to Game");
             Console.Write("Enter your Name: ");
-            
+            player.Name = Console.ReadLine();
 
 
-            Game game = new Game();
+            Game game = new Game(player.Name);//passed the name so magagamit siya sa game
             game.Play();
-            Console.ReadLine(); 
         }
     }
 }

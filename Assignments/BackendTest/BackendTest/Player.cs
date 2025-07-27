@@ -11,6 +11,7 @@ namespace BackendTest
         public string Name { get; set; }
         public int Health { get; private set; }
 
+        
         public Player()
         {
  
@@ -20,9 +21,20 @@ namespace BackendTest
         public Player(string name)
         {
             Name = name;
-            Health = 5;
+            Health = 3;
         }
 
+        public void TakeDamage()
+        {
+            Health -= 1;
+            if (Health < 0) Health = 0;
+        }
 
+        public void PotionHeal()
+        {
+            if(Health > 0)
+            {
+            }
+        }
     }
 }

@@ -12,12 +12,13 @@ namespace BackendTest
         private Player computer;
         private Random  random;
 
+        /* Deleted/commented this part because I will be using the other method so I could use the playername.
         public Game()
         {
             player = new Player();
             computer = new Player("Computer");
             random = new Random();
-        }
+        }*/
         public Game(string playerName)
         {
             player = new Player(playerName);
@@ -26,6 +27,10 @@ namespace BackendTest
         }
         public void Play()
         {
+            //added variables for input validation
+            bool valid;
+            int value;
+
             while (player.Health>0 && computer.Health > 0) 
             {
                 Console.WriteLine("\nChoose your move:");
@@ -34,22 +39,35 @@ namespace BackendTest
                 Console.WriteLine("3. Scissors (Press '3')");
                 Console.WriteLine("4. Use Potion (Press '4')");
 
-                string playerinput = Console.ReadKey();
-                string computerinput = random.Next(8);//random generated
+                //fixed the datatypes & added input validation
+                do
+                {
+                    ConsoleKeyInfo playerinput = Console.ReadKey();
+                    valid = (int.TryParse(playerinput.KeyChar.ToString(), out value) && value > 0 && value < 5);
+
+                    if (!valid)
+                    {
+                        Console.WriteLine("\nInvalid choice. Please press 1, 2, 3, or 4.");
+                    }
+                   
+                } while (!valid);
+
+
+                int computerinput = random.Next(1,4);//random generated 
        
-       
-                int result = checkwinner(playerinput, computerinput);
+                    
+                int result = checkwinner(value, computerinput);
 
                 if(result == 1) 
                 {
              
-                    Console.WriteLine($"{player.Name} won this turn!");
+                    Console.WriteLine($"\n{player.Name} won this turn!");
                     
                 }
                 else if (result == -1)
                 {
      
-                    Console.WriteLine($"computer won this turn!");
+                    Console.WriteLine($"\ncomputer won this turn!");
 
                 }
          
@@ -67,8 +85,18 @@ namespace BackendTest
                 Console.WriteLine("\nComputer Wins! Game over");
             }
         }
-        private int checkwinner(char playinput, char cominput) 
+        private int checkwinner(int playerChoice, int cominput) 
         {
+            int p = playerChoice;
+            int c = cominput;
+          //1 rock
+          //2 paper
+          //3 scissors
+            if((p == 1 && c == 3) || (p == 2 && c == 3) || (p == 3 && c == 2))
+            {
+                return -1;
+            }
+
             return -1;
         }
 
