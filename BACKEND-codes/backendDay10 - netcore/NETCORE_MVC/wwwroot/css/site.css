@@ -32,10 +32,19 @@ body {
     color: white; 
     text-decoration: underline;
 }
-
     .custom-link:hover {
-        color: #ddd; 
+        color: #ddd;
     }
+
+.what {
+    color: #b10000;
+    margin: 20px 0px;
+}
+
+.glance {
+    text-align:center;
+}
+
 
 .floating-container {
     display: flex;
