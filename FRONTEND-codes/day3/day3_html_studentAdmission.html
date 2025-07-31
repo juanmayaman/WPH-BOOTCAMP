@@ -96,7 +96,7 @@
                 <h5 class="card-title text-danger text-center">Photo Upload</h5>
                 <div class="mb-3 d-flex justify-content-center">
                   <div style="border: 2px dashed #b10000; border-radius: 10px; padding: 10px; background-color: #f8d7da; max-width: 150px; width: 100%;">
-                    <img src="images/user.png" alt="Placeholder Image" style="width: 100%; height: auto; border-radius: 10px;">
+                    <img src="../images/user.png" alt="Placeholder Image" style="width: 100%; height: auto; border-radius: 10px;">
                   </div>
                 </div>
                 <label for="photo" class="form-label">Insert Photo <span class="text-danger">*</span></label>
@@ -269,10 +269,18 @@
             </div>
           </div>
         </div>
+        </div>
+
+        <div class="form-check d-flex justify-content-center align-items-center gap-2 mt-4">
+          <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+          <label class="form-check-label mb-0" for="agreeTerms">
+            I agree to the <a href="#" class="text-danger">terms and conditions</a> <span class="text-danger">*</span>
+          </label>
+        </div>
+
         <div class="mt-4 text-center">
           <button type="submit" class="btn btn-danger px-5">Submit Application</button>
         </div>
-        
       </form>
     </section>
   </div>
