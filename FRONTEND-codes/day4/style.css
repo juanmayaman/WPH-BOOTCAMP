@@ -1,13 +1,64 @@
 .main-header {
-  position: absolute;         
-  top: 20px;                  
-  left: 20px;                 
+  position: relative;         
+  margin: 20px;                 
   text-align: left;
   background-color: #34495E; 
   color: white;
-  padding: 20px;
-  border-radius: 300px;       
+  padding: 30px;
+  border-radius: 1.5rem;       
   border-bottom: 5px solid #1ABC9C; 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
   z-index: 1000;             
+}
+
+.container {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.div-table {
+  background-color: white;
+  width: 280px; /* Equal width for all */
+  padding: 25px;
+  margin: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+
+  /* Border styling */
+  border-top: 5px solid #E74C3C;     /* Red */
+  border-bottom: 5px solid #27AE60;  /* Green */
+  border-left: 4px dashed #34495E;
+  border-right: 4px double #34495E;
+
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+/* Hover effect */
+.div-table:hover {
+  transform: scale(1.03);
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-headers {
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #2C3E50;
+  color: white;
+  text-align: left;
+}
+
+.table-body td {
+  font-size: 18px;
+  color: #2C3E50;
+  padding: 10px;
 }
