@@ -71,9 +71,9 @@ body {
 .logo {
     width: 120px;
     height: 120px;
-    object-fit: contain; /* or use 'cover' depending on effect */
+    object-fit: contain;
     display: block;
-    margin: 0 auto; /* center inside box */
+    margin: 0 auto; 
 }
 
     .logo-img:hover {
