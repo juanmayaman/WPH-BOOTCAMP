@@ -39,6 +39,24 @@ namespace BackendTest
                 Health += 1;
                 potion--;
             }
+            else if (Health <= 0 && Potion ==1)
+            {
+                int heal = random.Next(1,3);//random generated 
+                if(heal == 1)
+                {
+                    Health = 1; //revive player with 1 health point
+                    Potion--;
+                    Console.WriteLine($"{Name} has been revived with 1 health point!");
+                }
+                else
+                {
+                    Console.WriteLine($"{Name} failed to revive.");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"{Name} has no potions left to use.");
+            }
         }
     }
 }
