@@ -58,7 +58,18 @@ namespace BackendTest
                     
                 int result = checkwinner(value, computerinput);
 
-                if(result == 1) 
+                //revive logic 
+                if (player.Health <= 0 && player.Potion == 1)
+                {
+                    player.PotionHeal();
+                    if (player.Health > 0)
+                    {
+                        Console.WriteLine($"{player.Name} was revived! The game continues...");
+                        continue; //tuloy pag nabuhay ang player
+                    }
+                }
+
+                if (result == 1) 
                 {
              
                     Console.WriteLine($"\n{player.Name} won this turn!");
@@ -84,18 +95,15 @@ namespace BackendTest
 
             }
 
-            if(player.Health <= 0 && player.Potion == 1)
-            {
-                player.PotionHeal();
-            }
-            else if (computer.Health <= 0)
-            {
-                Console.WriteLine($"\n{player.Name} Wins! Congratulations!");
-            }
-            else
+            if (player.Health <= 0)
             {
                 Console.WriteLine("\nComputer Wins! Game over");
             }
+            else
+            {
+                Console.WriteLine($"\n{player.Name} Wins! Congratulations!");
+            }
+                
         }
         private int checkwinner(int playerChoice, int cominput) 
         {
