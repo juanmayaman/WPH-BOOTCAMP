@@ -39,7 +39,7 @@ namespace BackendTest
                 Health += 1;
                 potion--;
             }
-            else if (Health <= 0 && Potion ==1)
+            else if (Health <= 0 && Potion ==1) //if player is dead and has a potion left
             {
                 int heal = random.Next(1,3);//random generated 
                 if(heal == 1)
