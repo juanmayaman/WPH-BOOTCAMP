@@ -10,14 +10,16 @@ namespace BackendTest
     {
         public string Name { get; set; }
         public int Health { get; private set; }
+        public int Potion { get; private set; }
 
-        
-        public Player()
+        //removed/commented this part because I will be using the other method so I could use the playername.
+        /*public Player()
         {
  
             Health = 6;
-        }
+        }*/
 
+        //adjusted the health since up to 3 lang daw
         public Player(string name)
         {
             Name = name;
@@ -32,9 +34,10 @@ namespace BackendTest
 
         public void PotionHeal()
         {
-            if(Health > 0)
+            /*int potion = 1;
+            if(Health > 0 && po)
             {
-            }
+            }*/
         }
     }
 }

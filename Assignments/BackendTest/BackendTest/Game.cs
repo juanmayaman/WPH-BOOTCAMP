@@ -69,8 +69,16 @@ namespace BackendTest
      
                     Console.WriteLine($"\ncomputer won this turn!");
 
+                }else if (result == 0)
+                {
+                    Console.WriteLine("\nIt's a tie! No damage taken.");
                 }
-         
+                else if (value == 4 && player.Health < 6) //if player uses potion
+                {
+                    player.PotionHeal();
+                    Console.WriteLine($"\n{player.Name} used a potion and healed 1 health point!");
+                }
+
                 Console.WriteLine($"Remaining Health - {player.Name}: {player.Health}, Computer: {computer.Health}");
 
                 
@@ -96,30 +104,41 @@ namespace BackendTest
             ShowPicked(p, player.Name);
             ShowPicked(c, computer.Name);
             
-
-            if((p == 1 && c == 3) || (p == 2 && c == 3) || (p == 3 && c == 2))
+            //player wins
+            if((p == 1 && c == 3) || (p == 2 && c == 1) || (p == 3 && c == 2))
             {
+                computer.TakeDamage();
                 return 1;
+            }else if((c == 1 && p == 3) || (c == 2 && c == 3) || (c == 3 && p == 2)) //computer wins
+            {
+                player.TakeDamage();
+                return -1;
+            }else if((p == 1 && c == 1) || (p == 2 && c == 2) || (p == 3 && c == 3)) //player tie
+            {
+                return 0; 
+            }else if(p == 4 && player.Health < 6) 
+            {
+  
             }
-
-            return -1;
+                return -1;
 
         }
 
-        //added method to show the chocie
+        //added a method to show the chocie
         public static void ShowPicked(int choice, string name)
         {
             if(choice == 1)
             {
-                Console.WriteLine($"{name} picked ROCK!");
+                Console.WriteLine($"\n{name} picked ROCK!");
             } else if(choice == 2)
             {
-                Console.WriteLine($"{name} picked PAPER!");
+                Console.WriteLine($"\n{name} picked PAPER!");
             }else if(choice == 3)
             {
-                Console.WriteLine($"{name} picked SCISSORS!");
+                Console.WriteLine($"\n{name} picked SCISSORS!");
+            }else if(choice == 4){
+                Console.WriteLine($"\n{name} picked POTION!");
             }
         }
-
     }
 }

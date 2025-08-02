@@ -17,7 +17,8 @@ namespace BackendTest
             bool valid;
             string name;
 
-            Player player = new Player();
+            //remove the temp player for program simplicity lang po
+            
             Console.WriteLine("Welcome to Game");
             do
             {
@@ -25,20 +26,14 @@ namespace BackendTest
                 name = Console.ReadLine();
                 valid = name.All(char.IsLetter);
 
-                if (valid)
-                {
-                    player.Name = name;
-                    valid = true;
-                }
-                else
+                if (!valid)
                 {
                     Console.WriteLine("Please enter alphabetical letters only.");
-                    valid = false;
                 }
 
             } while (!valid);
-    
-            Game game = new Game(player.Name);//passed the name so magagamit siya sa game
+
+            Game game = new Game(name);
             game.Play();
         }
     }
