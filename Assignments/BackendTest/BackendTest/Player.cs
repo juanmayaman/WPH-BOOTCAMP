@@ -10,7 +10,7 @@ namespace BackendTest
     {
         public string Name { get; set; }
         public int Health { get; private set; }
-        public int Potion { get; private set; }
+        public int Potion { get; private set; } = 1;
 
         //removed/commented this part because I will be using the other method so I could use the playername.
         /*public Player()
@@ -34,10 +34,11 @@ namespace BackendTest
 
         public void PotionHeal()
         {
-            /*int potion = 1;
-            if(Health > 0 && po)
+            if(Health > 0 && potion == 1)
             {
-            }*/
+                Health += 1;
+                potion--;
+            }
         }
     }
 }

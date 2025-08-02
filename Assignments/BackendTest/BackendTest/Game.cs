@@ -73,9 +73,9 @@ namespace BackendTest
                 {
                     Console.WriteLine("\nIt's a tie! No damage taken.");
                 }
-                else if (value == 4 && player.Health < 6) //if player uses potion
+                else if (result == 4) 
                 {
-                    player.PotionHeal();
+
                     Console.WriteLine($"\n{player.Name} used a potion and healed 1 health point!");
                 }
 
@@ -84,7 +84,12 @@ namespace BackendTest
                 
 
             }
-            if (player.Health < 0)
+
+            if(player.Health <= 0 && player.Potion == 1)
+            {
+                player.PotionHeal();
+            }
+            else if (computer.Health <= 0)
             {
                 Console.WriteLine($"\n{player.Name} Wins! Congratulations!");
             }
@@ -101,9 +106,19 @@ namespace BackendTest
             int p = playerChoice;
             int c = cominput;
 
-            ShowPicked(p, player.Name);
-            ShowPicked(c, computer.Name);
-            
+            //added a condition for potion
+            if (p == 4)
+            {
+                player.PotionHeal();
+                ShowPicked(p, player.Name);
+                return 4; //return 4 if player used potion
+            }
+            else
+            {
+                ShowPicked(p, player.Name);
+                ShowPicked(c, computer.Name);
+            }
+
             //player wins
             if((p == 1 && c == 3) || (p == 2 && c == 1) || (p == 3 && c == 2))
             {
@@ -116,12 +131,8 @@ namespace BackendTest
             }else if((p == 1 && c == 1) || (p == 2 && c == 2) || (p == 3 && c == 3)) //player tie
             {
                 return 0; 
-            }else if(p == 4 && player.Health < 6) 
-            {
-  
             }
                 return -1;
-
         }
 
         //added a method to show the chocie
