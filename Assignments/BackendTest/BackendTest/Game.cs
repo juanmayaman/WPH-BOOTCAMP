@@ -76,12 +76,11 @@ namespace BackendTest
                 else if (result == 4) 
                 {
 
-                    Console.WriteLine($"\n{player.Name} used a potion and healed 1 health point!");
+                    Console.WriteLine($"\n");
                 }
 
                 Console.WriteLine($"Remaining Health - {player.Name}: {player.Health}, Computer: {computer.Health}");
-
-                
+                Console.WriteLine($"Remaining Potions - {player.Name}: {player.Potion}");
 
             }
 
@@ -110,7 +109,6 @@ namespace BackendTest
             if (p == 4)
             {
                 player.PotionHeal();
-                ShowPicked(p, player.Name);
                 return 4; //return 4 if player used potion
             }
             else
@@ -120,19 +118,23 @@ namespace BackendTest
             }
 
             //player wins
-            if((p == 1 && c == 3) || (p == 2 && c == 1) || (p == 3 && c == 2))
+            if ((p == 1 && c == 3) || (p == 2 && c == 1) || (p == 3 && c == 2))
             {
                 computer.TakeDamage();
                 return 1;
-            }else if((c == 1 && p == 3) || (c == 2 && c == 3) || (c == 3 && p == 2)) //computer wins
+            }
+            // computer wins
+            else if ((c == 1 && p == 3) || (c == 2 && p == 1) || (c == 3 && p == 2))
             {
                 player.TakeDamage();
                 return -1;
-            }else if((p == 1 && c == 1) || (p == 2 && c == 2) || (p == 3 && c == 3)) //player tie
-            {
-                return 0; 
             }
-                return -1;
+            // tie
+            else if (p == c)
+            {
+                return 0;
+            }
+            return -1;
         }
 
         //added a method to show the chocie
