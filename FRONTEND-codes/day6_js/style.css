@@ -183,7 +183,7 @@ body {
 }
 
 /* FOR LISTS */
-.multiples-generator button{
+.multiples-generator button, .divisible-generator button {
     padding: 12px 20px;
     background-color: #007BFF; 
     color: white;
@@ -192,4 +192,17 @@ body {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px auto;   
+    width: fit-content;   
+    text-align: center;
+}
+
+li {
+    font-size: 1.5rem;
+    margin: 4px 0;
 }
