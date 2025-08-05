@@ -1,12 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lists of Multiples</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lists of Numbers</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <div class="grid-container">
+    <header class="main-header">
+      <h1>Lists of Numbers</h1>
+      <nav class="main-nav">
+        <ul>
+          <li class="links"><a href="conditional.html">Home</a></li>
+          <li class="links"><a href="prime.html">Prime</a></li>
+          <li class="links"><a href="lists.html">Lists</a></li>
+        </ul>
+      </nav>
+    </header>
 
-    <script src="script.js"></script>
+    <main class="main-content">
+      <div class="split-container">
+        <!-- Left Pane: Multiples of 3 -->
+        <div class="left-pane">
+          <h2>Multiples of 3</h2>
+          <p>Generates a list of the first 10 multiples of 3.</p>
+          <div class="multiples-generator">
+            <button id="generateMultiplesBtn" onclick="generateMultiples()">Generate Multiples</button>
+          </div>
+          <ul id="multiplesList"></ul>
+        </div>
+
+        <!-- Right Pane: Divisible by 5 -->
+        <div class="right-pane">
+          <h2>Divisible by 5</h2>
+          <p>Shows the last 10 numbers divisible by 5 between 1–100.</p>
+          <div class="divisible-generator">
+            <button id="generateDivisiblesBtn" onclick="generateDivisibleByFive()">Generate Divisibles</button>
+          </div>
+          <ul id="divisiblesList"></ul>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
