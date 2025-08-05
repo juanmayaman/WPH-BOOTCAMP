@@ -4,8 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prime Numbers</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="grid-container">
+        <header class="main-header">
+            <h1>Prime Numbers</h1>
+            <nav class="main-nav">
+            <ul>
+                <li class="links"><a href="conditional.html">Home</a></li>
+                <li class="links"><a href="prime.html">Prime</a></li>
+                <li class="links"><a href="lists.html">Lists</a></li>
+            </ul>
+            </nav>
+        </header>
+    </div>
+    
+    <!-- BUTTON-->
+    <div class="prime-button-wrapper">
+        <button id="showGridBtn" onclick="generatePrimeGrid()">Show Prime Grid</button>
+    </div>
+
+    <!-- GRID goes here -->
+    <div class="prime-grid" id="primeGrid"></div>
+
+    <footer class="main-footer">
+            <p>&copy; 2025 John Rich Nicolas. All rights reserved.</p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
