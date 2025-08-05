@@ -18,6 +18,10 @@ body {
     margin: auto;
     padding: 20px; 
 }
+.main-footer{
+    grid-area: footer;
+    text-align: center;
+}
 
 /* Header Section */
 .main-header {
@@ -176,4 +180,16 @@ body {
 
 #showGridBtn:hover {
     background-color: #0056b3;
+}
+
+/* FOR LISTS */
+.multiples-generator button{
+    padding: 12px 20px;
+    background-color: #007BFF; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
