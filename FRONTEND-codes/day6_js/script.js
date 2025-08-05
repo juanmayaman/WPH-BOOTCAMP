@@ -62,3 +62,28 @@ function generatePrimeGrid() {
         num++;
     }
 }
+
+// Function to handle the button click in lists
+function generateMultiples() {
+  const list = document.getElementById('multiplesList');
+  list.innerHTML = ""; 
+  for (let i = 1; i <= 10; i++) {
+    const li = document.createElement('li');
+    li.textContent = `${i * 3}`;
+    list.appendChild(li);
+  }
+}
+
+function generateDivisibleByFive() {
+  const list = document.getElementById('divisiblesList');
+  list.innerHTML = ""; 
+  let count = 0;
+  for (let i = 100; i >= 1 && count < 10; i--) {
+    if (i % 5 === 0) {
+      const li = document.createElement('li');
+      li.textContent = i;
+      list.appendChild(li);
+      count++;
+    }
+  }
+}
