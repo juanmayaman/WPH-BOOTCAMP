@@ -33,3 +33,32 @@ function checkEvenOdd() {
         alert("The number is odd.");
     }
 }
+
+//script for the prime 4x4 grid
+//eto function pang check kung prime number
+function isPrime(n) {
+    if (n < 2) return false;
+    for (let i = 2; i <= Math.sqrt(n); i++) {
+        if (n % i === 0) return false;
+    }
+    return true;
+}
+//eto function pang generate ng 4x4 grid ng prime numbers
+function generatePrimeGrid() {
+    const container = document.getElementById('primeGrid');
+    container.innerHTML = ""; // clear existing grid
+
+    let count = 0;
+    let num = 2;
+
+    while (count < 16) {
+        if (isPrime(num)) {
+            const box = document.createElement('div');
+            box.className = 'grid-item';
+            box.textContent = num;
+            container.appendChild(box);
+            count++;
+        }
+        num++;
+    }
+}
