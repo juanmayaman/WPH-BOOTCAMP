@@ -15,7 +15,7 @@
 
         <div class="main-content">
             <div class="left-container">
-                <h2> Prime Number Checker</h2>
+                <h2>Prime Number Checker</h2>
                 <p>Check if a number is a prime number or not</p>
 
                 <div class ="prime-checker">
@@ -27,7 +27,7 @@
             </div>
 
             <div class="mid-container">
-                <h2> Square Root Calculator</h2>
+                <h2>Square Root Calculator</h2>
                 <p>Check the square root of a number</p>
 
                 <div class ="prime-checker">
@@ -38,7 +38,23 @@
                 <div id="sqrtResult" class="output-box"></div>
             </div>
             <div class="right-container">
+                <h2>Phone Number Format Checker</h2>
+                <p>Check for Philippines or Singaporean Number</p>
 
+                <div class="prime-checker">
+                    <input 
+                        type="text" 
+                        id="phoneInput" 
+                        placeholder="Enter +639XXXXXXXXX, 09XXXXXXXXX, or +65XXXXXXXX"
+                        pattern="^(\+639\d{9}|09\d{9}|\+65\d{8})$"
+                        title="Examples: +639171234567, 09171234567, +6591234567"
+                        required
+                    >
+                    <button id="checkPhone" onclick="checkPhone()">Check Number</button>
+                </div>
+
+                <!-- Output box -->
+                <div id="phoneResult" class="output-box"></div>
             </div>
         </div>
 

@@ -30,6 +30,8 @@ function checkPrime() {
     }
 
     // Check divisibility up to square root of num
+    //chechck gang sqrt lang ng number, pag may divisible/divisor or factor na pwede mag divid di na siya prime agad
+    //skip din mga even numbers since even sila and di sila prime. except 2
     const sqrt = Math.sqrt(num);
     for (let i = 3; i <= sqrt; i += 2) {
         if (num % i === 0) {
@@ -58,5 +60,25 @@ function checkSqrt() {
         const sqrt = Math.sqrt(parseFloat(input)).toFixed(2);
         resultBox.textContent = `√${input} = ${sqrt}`;
         resultBox.style.color = "#00C896";
+    }
+}
+
+function checkPhone() {
+    const input = document.getElementById("phoneInput").value.trim();
+    const resultBox = document.getElementById("phoneResult");
+
+    const phRegex1 = /^09\d{9}$/;          // e.g. 09171234567
+    const phRegex2 = /^\+639\d{9}$/;       // e.g. +639171234567
+    const sgRegex = /^\+65\d{8}$/;         // e.g. +6591234567
+
+    if (phRegex1.test(input) || phRegex2.test(input)) {
+        resultBox.textContent = "Valid Philippine number!";
+        resultBox.style.color = "#00C896";
+    } else if (sgRegex.test(input)) {
+        resultBox.textContent = "Valid Singaporean number!";
+        resultBox.style.color = "#00C896";
+    } else {
+        resultBox.textContent = "Invalid phone number format.";
+        resultBox.style.color = "#FF4081";
     }
 }
