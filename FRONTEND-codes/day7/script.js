@@ -67,14 +67,22 @@ function checkPhone() {
     const input = document.getElementById("phoneInput").value.trim();
     const resultBox = document.getElementById("phoneResult");
 
-    const phRegex1 = /^09\d{9}$/;          // e.g. 09171234567
-    const phRegex2 = /^\+639\d{9}$/;       // e.g. +639171234567
-    const sgRegex = /^\+65\d{8}$/;         // e.g. +6591234567
+    function isValidPHLocal(num) {
+        return num.startsWith("09") && num.length === 11;
+    }
 
-    if (phRegex1.test(input) || phRegex2.test(input)) {
+    function isValidPHIntl(num) {
+        return num.startsWith("+639") && num.length === 13;
+    }
+
+    function isValidSG(num) {
+        return num.startsWith("+65") && num.length === 11;
+    }
+
+    if (isValidPHLocal(input) || isValidPHIntl(input)) {
         resultBox.textContent = "Valid Philippine number!";
         resultBox.style.color = "#00C896";
-    } else if (sgRegex.test(input)) {
+    } else if (isValidSG(input)) {
         resultBox.textContent = "Valid Singaporean number!";
         resultBox.style.color = "#00C896";
     } else {
