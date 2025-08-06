@@ -30,11 +30,11 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    background-color: #00C896; /* Emerald Green */
-    color: #121212; /* Deep Charcoal */
+    background-color: #00C896; 
+    color: #121212; 
     padding: 30px;
     border-radius: 1.5rem;
-    border-bottom: 5px solid #FF4081; /* Magenta Accent */
+    border-bottom: 5px solid #FF4081;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
     margin: 0;
 }
@@ -44,4 +44,54 @@ body {
     font-size: 2.5rem;
     letter-spacing: 1px;
     text-transform: uppercase;
+}
+
+/* Containters */
+.main-content{
+    grid-area: main;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.left-container,
+.mid-container,
+.right-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    flex: 1;
+    padding: 20px;
+    border-radius: 1rem;
+    background-color: #1e1e2f;   
+    color: #E0E0E0;               
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
+}
+
+/*Input*/
+.prime-checker input[type="number"]{
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    width: 200px;
+    font-size: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+/*BUTTONS*/
+button {
+    background-color: #00C896;
+    color: #121212;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #FF4081; 
+    color: #E0E0E0;
 }
