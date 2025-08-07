@@ -20,36 +20,37 @@
                 <!-- Output box -->
                 <div class="output-box">
                     <div class="history-box" id="historyNum">tae</div>
-                    <div id="result" class="result-box">tae</div>
+                    <div id="result" class="result-box">0</div>
                 </div> 
 
                 <!-- Calculator and buttons -->
                 <div class="calculator">
                     <div class="button-container">   
-                        <button class="operators" onclick="checkPrime()">%</button>
-                        <button class="operators" onclick="checkPrime()">^</button>
-                        <button class="operators" onclick="checkPrime()">sqrt</button>
-                        <button class="operators" onclick="checkPrime()">/</button>
+                        <!-- Calculator Buttons -->
+                        <button class="operator" data-op="%">%</button>
+                        <button class="operator" data-op="^">^</button>
+                        <button class="operator" data-op="sqrt">√</button>
+                        <button class="operator" data-op="/">/</button>
 
-                        <button onclick="checkPrime()">7</button>
-                        <button onclick="checkPrime()">8</button>
-                        <button onclick="checkPrime()">9</button>
-                        <button class="operators" onclick="checkPrime()">x</button>
+                        <button class="number" data-num="7">7</button>
+                        <button class="number" data-num="8">8</button>
+                        <button class="number" data-num="9">9</button>
+                        <button class="operator" data-op="*">×</button>
 
-                        <button onclick="checkPrime()">4</button>
-                        <button onclick="checkPrime()">5</button>
-                        <button onclick="checkPrime()">6</button>
-                        <button class="operators" onclick="checkPrime()">-</button>
+                        <button class="number" data-num="4">4</button>
+                        <button class="number" data-num="5">5</button>
+                        <button class="number" data-num="6">6</button>
+                        <button class="operator" data-op="-">−</button>
 
-                        <button onclick="checkPrime()">1</button>
-                        <button onclick="checkPrime()">2</button>
-                        <button onclick="checkPrime()">3</button>
-                        <button class="operators" onclick="checkPrime()">+</button>
+                        <button class="number" data-num="1">1</button>
+                        <button class="number" data-num="2">2</button>
+                        <button class="number" data-num="3">3</button>
+                        <button class="operator" data-op="+">+</button>
 
-                        <button class="clear" onclick="checkPrime()">⌫</button>
-                        <button onclick="checkPrime()">0</button>
-                        <button onclick="checkPrime()">.</button>
-                        <button class="equals" onclick="checkPrime()">=</button>
+                        <button class="clear" data-action="back">⌫</button>
+                        <button class="number" data-num="0">0</button>
+                        <button class="number" data-num=".">.</button>
+                        <button class="equals" data-action="equal">=</button>
                     </div>
                 </div>
             </div>
