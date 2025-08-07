@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="grid-container">
+        <header class="main-header">
+            <h1>Day 8 - Interactive Calculator</h1>
+        </header>
+
+        <div class="main-content">
+            <div class="container">
+                <h2>Calculator</h2>
+
+                <!-- Output box -->
+                <div class="output-box">
+                    <div class="history-box" id="historyNum">tae</div>
+                    <div id="result" class="result-box">tae</div>
+                </div> 
+
+                <!-- Calculator and buttons -->
+                <div class="calculator">
+                    <div class="button-container">   
+                        <button class="operators" onclick="checkPrime()">%</button>
+                        <button class="operators" onclick="checkPrime()">^</button>
+                        <button class="operators" onclick="checkPrime()">sqrt</button>
+                        <button class="operators" onclick="checkPrime()">/</button>
+
+                        <button onclick="checkPrime()">7</button>
+                        <button onclick="checkPrime()">8</button>
+                        <button onclick="checkPrime()">9</button>
+                        <button class="operators" onclick="checkPrime()">x</button>
+
+                        <button onclick="checkPrime()">4</button>
+                        <button onclick="checkPrime()">5</button>
+                        <button onclick="checkPrime()">6</button>
+                        <button class="operators" onclick="checkPrime()">-</button>
+
+                        <button onclick="checkPrime()">1</button>
+                        <button onclick="checkPrime()">2</button>
+                        <button onclick="checkPrime()">3</button>
+                        <button class="operators" onclick="checkPrime()">+</button>
+
+                        <button class="clear" onclick="checkPrime()">⌫</button>
+                        <button onclick="checkPrime()">0</button>
+                        <button onclick="checkPrime()">.</button>
+                        <button class="equals" onclick="checkPrime()">=</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="main-footer">
+            <p>&copy; 2025 John Rich Nicolas. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
