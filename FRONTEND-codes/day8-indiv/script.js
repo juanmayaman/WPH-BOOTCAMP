@@ -11,6 +11,7 @@ function updateDisplay() {
 function showError(message) {
   resultDisplay.textContent = message;
   historyDisplay.textContent = expression || "";
+  expression = "";
   hasError = true;
 }
 
@@ -22,33 +23,26 @@ function clearDisplay() {
 }
 
 function handleInput(input) {
-  if (hasError) {
-    clearDisplay();
-  }
+  if (hasError) clearDisplay();
 
   try {
     const lastChar = expression.slice(-1);
 
-    // Convert input symbols to display symbols
     let displayInput = input;
     if (input === "*") displayInput = "×";
     if (input === "/") displayInput = "÷";
     if (input === "-") displayInput = "−";
     if (input === "sqrt") displayInput = "√";
 
-    // Validate operator sequences
     if ("+-×÷%^".includes(lastChar) && "+×÷%^".includes(displayInput)) {
       throw new Error("Cannot have two operators in a row");
     }
 
-    // Prevent starting with an invalid operator
     if (expression === "" && "+×÷%^".includes(displayInput)) {
       throw new Error("Expression cannot start with an operator");
     }
 
-    // Validate decimal points
     if (displayInput === ".") {
-      // Check if current number already has a decimal point
       const currentNumberMatch = expression.match(/[\d.]*$/);
       if (currentNumberMatch && currentNumberMatch[0].includes(".")) {
         throw new Error("Number already contains a decimal point");
@@ -60,16 +54,13 @@ function handleInput(input) {
       }
     }
 
-    // Handle square root
     if (displayInput === "√") {
-      // Check if we should multiply first (if last char is a number or closing paren)
       if (expression !== "" && (/[\d)]/.test(lastChar))) {
         expression += "×√(";
       } else {
         expression += "√(";
       }
     } else {
-      // Handle implicit multiplication before parentheses
       if (displayInput === "(" && expression !== "" && (/[\d)]/.test(lastChar))) {
         expression += "×(";
       } else {
@@ -87,7 +78,9 @@ function calculateResult() {
   try {
     if (!expression) return;
 
-    // Replace display symbols with JS equivalents
+    // Save the original expression before any mutation
+    const originalExpression = expression;
+
     let evalExpr = expression
       .replace(/×/g, "*")
       .replace(/÷/g, "/")
@@ -100,34 +93,35 @@ function calculateResult() {
     const closeParens = (evalExpr.match(/\)/g) || []).length;
     evalExpr += ")".repeat(openParens - closeParens);
 
-    // Handle percent
+    // Handle percentage
     evalExpr = evalExpr.replace(/(\d+(\.\d+)?)%(?![\d(])/g, "($1/100)");
 
-    // Check for divide by zero before evaluation
+    // Prevent divide by zero
     if (/\/\s*0(?![\d.])/.test(evalExpr)) {
       throw new Error("Cannot divide by zero");
     }
 
-    // Validate square roots of negative numbers before evaluation
-    const sqrtMatches = evalExpr.match(/Math\.sqrt\([^)]+\)/g);
+    // Validate square roots of negative numbers
+    const sqrtMatches = evalExpr.match(/Math\.sqrt\(([^()]+)\)/g);
     if (sqrtMatches) {
       for (const match of sqrtMatches) {
-        const inner = match.match(/Math\.sqrt\(([^)]+)\)/)[1];
+        const innerExpr = match.match(/Math\.sqrt\(([^()]+)\)/)[1];
         try {
-          const value = eval(inner);
-          if (value < 0) {
+          const innerValue = Function('"use strict";return (' + innerExpr + ')')();
+          if (typeof innerValue !== "number" || isNaN(innerValue)) {
+            throw new Error("Invalid value inside square root");
+          }
+          if (innerValue < 0) {
             throw new Error("Cannot calculate square root of a negative number");
           }
         } catch (e) {
-          // If we can't evaluate the inner expression, let it fall through to main eval
-          continue;
+          throw new Error("Cannot calculate square root of a negative number");
         }
       }
     }
 
-    // Validate and evaluate
     const result = eval(evalExpr);
-    
+
     if (!isFinite(result)) {
       throw new Error("Result is too large or too small to display");
     }
@@ -136,12 +130,12 @@ function calculateResult() {
       throw new Error("Invalid mathematical operation");
     }
 
-    historyDisplay.textContent = expression;
+    // Display history correctly using saved original expression
+    historyDisplay.textContent = originalExpression;
     expression = result.toString();
     hasError = false;
     updateDisplay();
   } catch (error) {
-    // Handle specific error types with appropriate messages
     if (error.message.includes("Cannot calculate square root of a negative number")) {
       showError("Cannot calculate square root of a negative number");
     } else if (error.message.includes("Cannot divide by zero")) {
@@ -172,7 +166,7 @@ document.querySelectorAll(".operator").forEach(btn => {
 document.querySelector(".clear").addEventListener("click", () => {
   if (hasError || expression === "") {
     clearDisplay();
-
+  } else {
     if (expression.endsWith("√(")) {
       expression = expression.slice(0, -2);
     } else {
