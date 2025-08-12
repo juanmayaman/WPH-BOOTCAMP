@@ -1,5 +1,7 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -8,15 +10,71 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  margin-bottom: 60px;
+    background-color: #000415;
+    margin-bottom: 60px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #f4f4f4;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        "header header header"
+        "sidebar main main"
+        "footer footer footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.main-header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #FFD93D;
+    color: #1e1e2f;
+    padding: 30px;
+    border-radius: 1.5rem;
+    border-bottom: 5px solid #FF6F61;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    margin: 0;
+}
+
+.title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0 #FFD93D;
+    text-decoration: none;
+}
+
+.title:hover {
+    color: #E85A50; 
+ }
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    margin: 0;
+}
+
+.links a {
+    text-decoration: none;
+    color: #1e1e2f;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+.links a:hover {
+    color: #6BCB77;
 }
