@@ -14,9 +14,9 @@
             <h1><a class="title" asp-area="" asp-controller="Home" asp-action="Index">TO - DO LIST</a></h1>
             <nav class="main-nav">
                 <ul>
-                    <li class="links"><a href="conditional.html">Home</a></li>
+                    <li class="links"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li class="links"><a href="prime.html">About</a></li>
-                    <li class="links"><a href="lists.html">Privacy</a></li>
+                    <li class="links"><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
                 </ul>
             </nav>
         </header>
@@ -24,26 +24,19 @@
         <div class="side-nav">
             <h2>Contents</h2>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Index">Overview</a></li>
                 <li><a href="#">Tasks</a></li>
                 <li><a href="#">Completed</a></li>
                 <li><a href="#">Deleted</a></li>
             </ul>
         </div>
 
-        <div class="main-container">
-            <h2> Overview</h2>
-        </divC>
+        <div class="main-content">
+                @RenderBody()
+        </div>
 
     </div>
 
-
-    
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">

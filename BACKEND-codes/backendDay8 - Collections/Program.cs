@@ -187,13 +187,13 @@ namespace backendDay8___Collections_student_management
                         if (students.Any(s => s.StudID == tempID))
                         {
                             Console.WriteLine("That Student ID already exists. Please enter a different ID.");
-                            tempID = null; // force loop again
+                            tempID = null; 
                         }
                     } while (tempID == null);
 
                     Student student = new Student();
                     student.Name = InputHelper.CheckString("Enter student name: ");
-                    student.StudID = tempID; // already checked above
+                    student.StudID = tempID;
                     student.Age = InputHelper.CheckAge("Enter age (18 - 40): ");
                     student.Program = InputHelper.CheckString("Enter course/program (ex: BSCS): ").ToUpper();
 
