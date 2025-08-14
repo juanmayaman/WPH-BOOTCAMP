@@ -2,14 +2,44 @@
     ViewData["Title"] = "Tasks Lists";
 }
 
-<h1>Tasks Lists</h1>
-<!--Tasks Buttons & filters-->
-<div>
+<div class="main-content">
+    <h1>Tasks List</h1>
 
-</div>
+    <button id="addTaskBtn">Add Task</button>
 
-<div class="task-container">
-    <div class="task-card">
+    <!-- POPUP FOR ADD HTML -->
+    <div id="addTaskModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form asp-action="AddTask" method="post">
+                <label>Title:</label>
+                <input type="text" name="Title" required />
 
+                <label>Description:</label>
+                <textarea name="Description"></textarea>
+
+                <label>Subject:</label>
+                <input type="text" name="Subject" />
+
+                <label>Due Date:</label>
+                <input type="date" name="DueDate" />
+
+                <button type="submit">Save Task</button>
+            </form>
+        </div>
+    </div>
+ </dic>
+
+    <!-- Task list display here -->
+    <!--<div id="tasksContainer">-->
+        @* Render tasks *@
+        <!--@foreach (var task in Model)-->
+       <!--->{
+            <div class="task-card">
+                <h3>@task.Title</h3>
+                <p>@task.Details</p>
+                <p>Assigned To: @task.AssignedTo</p>
+            </div>
+        }
     </div>
 </div>
