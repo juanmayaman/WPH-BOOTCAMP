@@ -11,5 +11,11 @@ namespace Capstone_toDoList.Controllers
         {
             return View(); 
         }
+
+        [HttpGet]
+        public IActionResult AddTask()
+        {
+            return View();
+        }
     }
 }
