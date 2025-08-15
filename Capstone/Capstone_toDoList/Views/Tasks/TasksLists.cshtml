@@ -1,25 +1,36 @@
 ﻿@{
     ViewData["Title"] = "Tasks Lists";
 }
-<h1 style="margin-bottom:0";>Tasks List</h1>
+<h1 style="margin-bottom:0">Tasks List</h1>
 <div class="task-lists-header">
     <div class="dropdown">
       <button class="dropbtn">Subject</button>
-      <div class="dropdown-content">
+      <div class="dropdown-subject">
         <a href="#">Link 1</a>
         <a href="#">Link 2</a>
         <a href="#">Link 3</a>
       </div>
     </div>
 
+    <div class="dropdown">
+      <button class="dropbtn">Due Date</button>
+      <div class="dropdown-due">
+        <a href="#">Nearest → Farthest</a>
+        <a href="#">Farthest → Nearest</a>
+      </div>
+    </div>
+
+
+
     <button id="addTaskBtn">Add Task</button>
 </div>
     
 
     <!-- POPUP FOR ADD HTML -->
-    <div id="addTaskModal" class="modal">
+<div id="addTaskModal"
+     class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span id="x-button" class="close">&times;</span>
             <form asp-action="AddTask" method="post">
                 <label>Title:</label>
                 <input type="text" name="Title" required />
@@ -33,10 +44,14 @@
                 <label>Due Date:</label>
                 <input type="date" name="DueDate" />
 
-                <button type="submit">Save Task</button>
+                <div class="button-group">
+                    
+                    <button type="submit">Save Task</button>
+                    <button type="button" class="close">Cancel</button>
+                </div>
             </form>
         </div>
-    </div>
+ </div>
 
     <!-- Task list display here -->
     <!--<div id="tasksContainer">-->
