@@ -1,4 +1,7 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿const modal = document.getElementById("addTaskModal");
+const btn = document.getElementById("addTaskBtn");
+const span = document.getElementsByClassName("close")[0];
 
-// Write your JavaScript code.
+btn.onclick = () => modal.style.display = "flex";
+span.onclick = () => modal.style.display = "none";
+window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
