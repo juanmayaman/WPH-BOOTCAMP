@@ -1,5 +1,44 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<Capstone_toDoList.Models.TaskItem>
 @{
+    ViewData["Title"] = "Completed Tasks";
 }
+
+<h1 style="margin-bottom:0">Completed Tasks</h1>
+<div class="task-lists-header">
+    <div class="dropdown">
+        <button class="dropbtn">Category</button>
+        <div class="dropdown-category">
+            <a href="#">School</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Date Completed </button>
+        <div class="dropdown-due">
+            <a href="#">Near -> Far</a>
+            <a href="#">Far -> Near</a>
+        </div>
+    </div>
+</div>
+
+<div class="task-container">
+    @foreach (var task in Model)
+    {
+        <div class="task-card">
+            <div class="task-card-header">
+                <h3>@task.Title</h3>
+            </div>
+
+            <p>@task.Description</p>
+            <p><strong>Category: </strong>@task.Category</p>
+            <p><strong>Date Started:</strong> @task.DateStarted.ToShortDateString()</p>
+            <p><strong>Due:</strong> @task.DueDate.ToShortDateString()</p>
+            <p><strong>Date Completed:</strong> @(task.DateCompleted.HasValue? task.DateCompleted.Value.ToShortDateString() : "-")</p>
+            <p><strong>Assigned to:</strong> @task.AssignedTo</p>
+            <p><strong>Status: </strong>@(task.IsCompleted ? "Done ✅" : "Pending ⏳")</p>
+            <p><strong>Date Deleted:</strong> @(task.DateDeleted.HasValue? task.DateDeleted.Value.ToShortDateString() : "-")</p>
+        </div>
+    }
+</div>
