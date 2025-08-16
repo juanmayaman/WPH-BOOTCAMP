@@ -72,6 +72,7 @@ namespace Capstone_toDoList.Controllers
             return RedirectToAction("Completed");
         }
 
+        //delete task
         [HttpPost]
         public IActionResult DeleteTask(int taskId)
         {
@@ -94,5 +95,44 @@ namespace Capstone_toDoList.Controllers
             return RedirectToAction("Deleted");
         }
 
+        [HttpGet]
+        public IActionResult Edit(int taskId)
+        {
+            var task = tasks.FirstOrDefault(t => t.Id == taskId);
+            if (task == null)
+            {
+                TempData["Error"] = "Task not found.";
+                return RedirectToAction("TasksLists");
+            }
+
+            return View(task); // pass task to the Edit view
+        }
+
+        [HttpPost]
+        public IActionResult UpdateTask(TaskItem updatedTask)
+        {
+            var task = tasks.FirstOrDefault(t => t.Id == updatedTask.Id);
+            if (task == null)
+            {
+                TempData["Error"] = "Task not found.";
+                return RedirectToAction("TasksLists");
+            }
+
+            // Update properties
+            task.Title = updatedTask.Title;
+            task.Description = updatedTask.Description;
+            task.Category = updatedTask.Category;
+            task.DueDate = updatedTask.DueDate;
+            task.AssignedTo = updatedTask.AssignedTo;
+
+            // Optional: update priority based on DueDate
+            var daysLeft = (task.DueDate - DateTime.Today).Days;
+            if (daysLeft <= 1 && daysLeft >= 0) task.Priority = "Critical";
+            else if (daysLeft <= 4) task.Priority = "High";
+            else if (daysLeft <= 8) task.Priority = "Medium";
+            else task.Priority = "Low";
+
+            return RedirectToAction("TasksLists");
+        }
     }
 }
