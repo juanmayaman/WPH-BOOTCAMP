@@ -19,29 +19,33 @@ namespace Capstone_toDoList.Controllers
         [HttpPost]
         public IActionResult AddTask(TaskItem task)
         {
+
+            if (task.DueDate < DateTime.Today)
+            {
+                TempData["Error"] = "Due date cannot be in the past.";
+                return RedirectToAction("TasksLists");
+            }
             task.Id = tasks.Count + 1;
             task.IsCompleted = false;
+            task.DateStarted = DateTime.Today; //started date
 
-            //need calculate yung priority level
             /*
                 Critical-same day,1 day duedate
                 High - 2-4days from now
                 Medium - 5 -8 days
                 Low - 9 days above
              */
-            //for due date validation?
-            /*if (task.DueDate < DateTime.Today)
-            {
-                ModelState.AddModelError("DueDate", "Due date cannot be in the past.");
-                return View(task);
-            }*/
 
+            var daysLeft = (task.DueDate - DateTime.Today).Days;
+            if (daysLeft <= 1 && daysLeft >= 0) task.Priority = "Critical";
+            else if (daysLeft <= 4) task.Priority = "High";
+            else if (daysLeft <= 8) task.Priority = "Medium";
+            else task.Priority = "Low";
 
             tasks.Add(task);
 
             return RedirectToAction("TasksLists"); 
         }
-
 
     }
 }
