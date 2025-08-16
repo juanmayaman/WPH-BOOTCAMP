@@ -270,6 +270,15 @@ body {
     cursor: pointer;
     border-radius: 5px;
 }
+
+select:invalid {
+    color: #aaa; /* light gray like placeholder */
+}
+select option {
+    color: #000;
+}
+
+
 /*para sa submit button*/
 button[type="submit"] {
     background-color: #3e8e41;
@@ -283,9 +292,10 @@ button[type="button"] {
 /*PARA SA TASKS LIST/CARDS*/
 .task-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 3fr));
     gap: 15px;
     margin-top: 20px;
+    align-content:center;
 }
 
 .task-card {
