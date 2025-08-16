@@ -1,6 +1,8 @@
-﻿@{
+﻿@model List<Capstone_toDoList.Models.TaskItem>
+@{
     ViewData["Title"] = "Tasks Lists";
 }
+
 <h1 style="margin-bottom:0">Tasks List</h1>
 <div class="task-lists-header">
     <div class="dropdown">
@@ -15,7 +17,7 @@
     <div class="dropdown">
       <button class="dropbtn">Category</button>
       <div class="dropdown-category">
-        <a href="#">Link 1</a>
+        <a href="#">School</a>
         <a href="#">Link 2</a>
         <a href="#">Link 3</a>
       </div>
@@ -24,8 +26,8 @@
     <div class="dropdown">
       <button class="dropbtn">Due Date</button>
       <div class="dropdown-due">
-        <a href="#">Nearest → Farthest</a>
-        <a href="#">Farthest → Nearest</a>
+        <a href="#">Near -> Far</a>
+        <a href="#">Far -> Near</a>
       </div>
     </div>
 
@@ -40,23 +42,23 @@
             <span id="x-button" class="close">&times;</span>
             <form asp-action="AddTask" method="post">
                 <label>Title:</label>
-                <input type="text" name="Title" required />
+                <input type="text" name="Title" id="Title" required />
 
                 <label>Description:</label>
-                <textarea name="Description"></textarea>
+                <textarea name="Description" id="Description"></textarea>
 
                 <label for="category">Category:</label>
-                    <select name="category" id="category">
-                      <option value="Math">School</option>
-                      <option value="Science">Household</option>
-                      <option value="English">Work</option>
-                      <option value="History">Hobby</option>
-                      <option value="History">Others</option>
-                  </select>
-
+                <select name="category" id="category" required>
+                  <option value="" disabled selected hidden>-- Select a category --</option>
+                  <option value="School">School</option>
+                  <option value="Household">Household</option>
+                  <option value="Work">Work</option>
+                  <option value="Hobby">Hobby</option>
+                  <option value="Others">Others</option>
+                </select>
 
                 <label>Due Date:</label>
-                <input type="date" name="DueDate" />
+                <input type="date" name="DueDate" id="DueDate"required/>
 
                 <div class="button-group">
                     <button type="submit">Save Task</button>
@@ -66,16 +68,26 @@
         </div>
  </div>
 
-    <!-- Task list display here -->
-    <!--<div id="tasksContainer">-->
-        @* Render tasks *@
-        <!--@foreach (var task in Model)-->
-       <!--->{
-            <div class="task-card">
-                <h3>@task.Title</h3>
-                <p>@task.Details</p>
-                <p>Assigned To: @task.AssignedTo</p>
-            </div>
-        }
-    </div>
+<!-- Task list display here -->
+<div class="task-container">
+    @* Loop through tasks in the model *@
+    @foreach (var task in Model)
+     {
+    <div class="task-card">
+         <h3>@task.Title</h3>
+         <h3>@task.Id</h3>
+         <p>@task.Description</p>
+         <p>Category: @task.Category</p>
+         <p>Due: @task.DueDate.ToShortDateString()</p>
+         <p>Status: @(task.IsCompleted ? "Done ✅" : "Pending ⏳")</p>
+
+         <!--CRUD//// dipa siya tapos wala pang backend--->
+         <div class="CRUD-buttons">
+                <button type="complete">Completed</button>
+                <button type="edit">Edit Task</button>
+                <button type="delete" class="close">Delete</button>
+         </div>
+     </div>}
 </div>
+
+
