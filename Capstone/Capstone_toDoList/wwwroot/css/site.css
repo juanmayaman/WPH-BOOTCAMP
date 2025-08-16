@@ -138,22 +138,16 @@ body {
     align-items: center;  /* ensures buttons align properly */
     margin: 10px;
     gap: 20px;
+    border-bottom:solid;
+    border-bottom-color:#1e1e2f;
+    padding-bottom: 20px;
 }
 
-#addTaskBtn {
-    background-color: #3e8e41;
-    color: white;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    min-width:120px;
-}
+
 
 
 /* Style The Dropdown Button */
-.dropbtn{
+.dropbtn, #addTaskBtn{
   background-color: #1e1e2f;
   color: white;
   padding: 10px;
@@ -161,10 +155,12 @@ body {
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  min-width: 160px;
+  min-width: 100px;
 }
 
-
+#addTaskBtn {
+    background-color: #3e8e41;
+}
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
@@ -173,18 +169,19 @@ body {
 }
 
 /* Dropdown Content (Hidden by Default) */
-.dropdown-subject, .dropdown-due {
+.dropdown-prio, .dropdown-category, .dropdown-due{
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  min-width: 100px;
   box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
   z-index: 1;
 }
 
 /* Links inside the dropdown */
-.dropdown-subject a,
-.dropdown-due a {
+.dropdown-category a,
+.dropdown-due a,
+.dropdown-prio a{
   color: black;
   padding: 12px 16px;
   text-decoration: none;
@@ -192,15 +189,17 @@ body {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-subject a:hover,
-.dropdown-due a:hover {
+.dropdown-category a:hover,
+.dropdown-due a:hover,
+.dropdown-prio a:hover{
   background-color: #f1f1f1;
 }
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-subject,
-.dropdown:hover .dropdown-due {
-  display: block;
+.dropdown:hover .dropdown-category,
+.dropdown:hover .dropdown-due,
+.dropdown:hover .dropdown-prio{
+    display: block;
 }
 
 /* Change the background color of the dropdown button when active */
@@ -220,17 +219,29 @@ body {
     background-color: rgba(0,0,0,0.5); /* dimmed background */
     justify-content: center;
     align-items: center;
+    
 }
 
 
 /* Modal content */
 .modal-content {
-    background-color: white;
+    background-color: blanchedalmond;
     padding: 20px;
     border-radius: 8px;
     width: 400px;
-    position:relative;
+    position: relative;
+    font-weight:bold;
+}
 
+.modal-content input, .modal-content textarea , .modal-content select{
+    color: black;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;   /* <-- input takes full width of modal */
+    box-sizing: border-box; /* keeps padding inside */
+    margin-bottom:10px;
 }
 
 /*BUTTONS SA ADD TASKS*/
@@ -250,6 +261,24 @@ body {
     gap: 10px; 
     margin-top: 15px;
 }
+
+.button-group button {
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+/*para sa submit button*/
+button[type="submit"] {
+    background-color: #3e8e41;
+}
+
+button[type="button"] {
+    background-color: #FF6F61;
+}
+
 
 /*PARA SA TASKS LIST/CARDS*/
 .task-container {
