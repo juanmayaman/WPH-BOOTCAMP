@@ -71,14 +71,16 @@
         </div>
  </div>
 
+
+
 <!-- Task list display -->
 <div class="task-container">
     @* Loop through tasks in the model *@
     @foreach (var task in Model)
      {
     <div class="task-card">
-            <div class="task-card-header">
-                <h3>@task.Title</h3>
+        <div class="task-card-header">
+            <h3>@task.Title</h3>
                 <h3>
                     @task.Id -
                     <span style="color:@(
@@ -110,7 +112,7 @@
                 <!-- Edit button -->
                 <form asp-action="Edit" method="get">
                     <input type="hidden" name="id" value="@task.Id" />
-                    <button type="submit" style="background-color:#1e1e2f;">Edit</button>
+                    <button type="submit" style="background-color:#1e1e2f;" id="editTask">Edit</button>
                 </form>
 
                 <!-- Delete button -->
@@ -118,6 +120,44 @@
                     <input type="hidden" name="taskId" value="@task.Id" />
                     <button type="submit" class="close">Delete</button>
                 </form>
+            </div>
+
+             <!--POP UP FOR EDITING OF TASKS-->
+            <div id="editTaskModal"
+                 class="modal">
+                <div class="modal-content">
+                    <span id="x-button" class="close">&times;</span>
+                    <form asp-action="UpdateTask" method="post">
+                        <input type="hidden" name="Id" value="@task.Id" />
+
+                        <label>Title:</label>
+                        <input type="text" name="Title" value="@task.Title" required />
+
+                        <label>Description:</label>
+                        <textarea name="Description">@task.Description</textarea>
+
+                        <label>Category:</label>
+                        <select name="Category" required>
+                            <option value="School" @(task.Category=="School" ? "selected":"")>School</option>
+                            <option value="Work" @(task.Category=="Work" ? "selected":"")>Work</option>
+                            <option value="Household" @(task.Category=="Household" ? "selected":"")>Household</option>
+                            <option value="Hobby" @(task.Category=="Hobby" ? "selected":"")>Hobby</option>
+                            <option value="Others" @(task.Category=="Others" ? "selected":"")>Others</option>
+                        </select>
+
+                        <label>Due Date:</label>
+                        <input type="date" name="DueDate" value="@task.DueDate.ToString("yyyy-MM-dd")" required />
+
+                        <label>Assigned To:</label>
+                        <input type="text" name="AssignedTo" value="@task.AssignedTo" />
+
+
+                        <div class="button-group">
+                            <button type="submit">Update Task</button>
+                            <button type="button" class="close">Cancel</button>
+                        </div>
+                    </form>
+                </div>
             </div>
      </div>}
 </div>
