@@ -4,8 +4,17 @@
 <h1 style="margin-bottom:0">Tasks List</h1>
 <div class="task-lists-header">
     <div class="dropdown">
-      <button class="dropbtn">Subject</button>
-      <div class="dropdown-subject">
+      <button class="dropbtn">Priority</button>
+      <div class="dropdown-prio">
+        <a href="#">Critical</a>
+        <a href="#">High</a>
+        <a href="#">Medium</a>
+        <a href="#">Low</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Category</button>
+      <div class="dropdown-category">
         <a href="#">Link 1</a>
         <a href="#">Link 2</a>
         <a href="#">Link 3</a>
@@ -19,8 +28,6 @@
         <a href="#">Farthest → Nearest</a>
       </div>
     </div>
-
-
 
     <button id="addTaskBtn">Add Task</button>
 </div>
@@ -38,14 +45,20 @@
                 <label>Description:</label>
                 <textarea name="Description"></textarea>
 
-                <label>Subject:</label>
-                <input type="text" name="Subject" />
+                <label for="category">Category:</label>
+                    <select name="category" id="category">
+                      <option value="Math">School</option>
+                      <option value="Science">Household</option>
+                      <option value="English">Work</option>
+                      <option value="History">Hobby</option>
+                      <option value="History">Others</option>
+                  </select>
+
 
                 <label>Due Date:</label>
                 <input type="date" name="DueDate" />
 
                 <div class="button-group">
-                    
                     <button type="submit">Save Task</button>
                     <button type="button" class="close">Cancel</button>
                 </div>
