@@ -8,6 +8,9 @@
         public string Category { get; set; }
         public string Priority { get; set; }
         public bool IsCompleted { get; set; } // Status
-        public DateTime DueDate { get; set; } 
+        public DateTime DateStarted { get; set; } // When the task was started
+        public DateTime DueDate { get; set; }
+        public DateTime DateCompleted { get; set; }
+        public string AssignedTo { get; set; } // Name of person responsible
     }
 }
