@@ -58,7 +58,10 @@
                 </select>
 
                 <label>Due Date:</label>
-                <input type="date" name="DueDate" id="DueDate" required/> 
+                <input type="date" name="DueDate" id="DueDate" required/>
+
+                <label>Assigned To:</label>
+                <input type="text" name="AssignedTo" />
 
                 <div class="button-group">
                     <button type="submit" class="confirm">Save Task</button>
@@ -74,14 +77,26 @@
     @foreach (var task in Model)
      {
     <div class="task-card">
-        <div class="task-card-header">
-             <h3>@task.Title</h3>
-             <h3>@task.Id - @task.Priority</h3>
+            <div class="task-card-header">
+                <h3>@task.Title</h3>
+                <h3>
+                    @task.Id -
+                    <span style="color:@(
+                          task.Priority == "Critical" ? "red" :
+                          task.Priority == "High" ? "orange" :
+                          task.Priority == "Medium" ? "#FFD700" :  
+                          "green" 
+                )">
+                    @task.Priority
+                </span>
+            </h3>
         </div>
 
          <p>@task.Description</p>
             <p><strong>Category: </strong>@task.Category</p>
+            <p><strong>Date Started:</strong> @task.DateStarted.ToShortDateString()</p>
             <p><strong>Due:</strong> @task.DueDate.ToShortDateString()</p>
+            <p><strong>Assigned to:</strong> @task.AssignedTo</p>
             <p><strong>Status: </strong>@(task.IsCompleted ? "Done ✅" : "Pending ⏳")</p>
 
          <!--CRUD//// dipa siya tapos wala pang backend--->
@@ -106,5 +121,16 @@
             </div>
      </div>}
 </div>
+
+@section Scripts {
+    <script>
+        @if (TempData["Error"] != null)
+        {
+             <text>
+                alert("@TempData["Error"]");
+             </text>
+        }
+    </script>
+}
 
 
