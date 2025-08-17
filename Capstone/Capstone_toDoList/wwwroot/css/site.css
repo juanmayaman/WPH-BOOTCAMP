@@ -245,7 +245,7 @@ body {
 }
 
 /*BUTTONS SA ADD TASKS*/
-#x-button {
+#x-button, #editModalClose {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -356,10 +356,6 @@ select option {
     transition: background 0.2s;
 }
 
-/* Button colors */
-.CRUD-buttons .btn-complete { background-color: #28a745; } 
-.CRUD-buttons .btn-edit { background-color: #007bff; } 
-.CRUD-buttons .btn-delete { background-color: #dc3545; } 
 
 /* Optional: truncate long description */
 .task-card p.description {
