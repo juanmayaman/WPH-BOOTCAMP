@@ -8,17 +8,19 @@
     <div class="dropdown">
         <button class="dropbtn">Category</button>
         <div class="dropdown-category">
-            <a href="#">School</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+            <a asp-action="Completed" asp-route-category="School">School</a>
+            <a asp-action="Completed" asp-route-category="Household">House</a>
+            <a asp-action="Completed" asp-route-category="Work">Work</a>
+            <a asp-action="Completed" asp-route-category="Hobby">Hobby</a>
+            <a asp-action="Completed" asp-route-category="Others">Others</a>
         </div>
     </div>
 
     <div class="dropdown">
-        <button class="dropbtn">Date Completed </button>
+        <button class="dropbtn">Date Completed</button>
         <div class="dropdown-due">
-            <a href="#">Near -> Far</a>
-            <a href="#">Far -> Near</a>
+            <a asp-action="Completed" asp-route-sortOrder="Newest">Newest First</a>
+            <a asp-action="Completed" asp-route-sortOrder="Oldest">Oldest First</a>
         </div>
     </div>
 </div>

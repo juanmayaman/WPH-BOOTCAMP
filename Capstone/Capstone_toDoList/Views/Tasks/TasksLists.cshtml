@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Tasks Lists";
 }
-<!--NEED I ADD FUCNTIONALITIES NG MGA FILTERS-->
+
 <h1 style="margin-bottom:0">Tasks List</h1>
 <div class="task-lists-header">
 
@@ -31,8 +31,10 @@
         <button class="dropbtn">Category</button>
         <div class="dropdown-category">
             <a asp-action="TasksLists" asp-route-category="School">School</a>
+            <a asp-action="TasksLists" asp-route-category="Household">House</a>
             <a asp-action="TasksLists" asp-route-category="Work">Work</a>
-            <a asp-action="TasksLists" asp-route-category="Personal">Personal</a>
+            <a asp-action="TasksLists" asp-route-category="Hobby">Hobby</a>
+            <a asp-action="TasksLists" asp-route-category="Others">Others</a>
         </div>
     </div>
 
@@ -85,7 +87,7 @@
         </div>
  </div>
 
-<!-- SINGLE EDIT TASK MODAL -->
+<!--  EDIT TASK MODAL -->
 <div id="editTaskModal" class="modal">
     <div class="modal-content">
         <span id="editModalClose" class="close">&times;</span>
@@ -151,7 +153,7 @@
             <p><strong>Assigned to:</strong> @task.AssignedTo</p>
             <p><strong>Status: </strong>@(task.IsCompleted ? "Done ✅" : "Pending ⏳")</p>
 
-         <!--CRUD//// dipa siya tapos wala pang backend--->
+         <!--CRUD//// --->
             <div class="CRUD-buttons">
                 <!-- Completed button -->
                 <form asp-action="CompleteTask" method="post">

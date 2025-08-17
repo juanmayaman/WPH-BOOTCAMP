@@ -9,19 +9,19 @@
     <div class="dropdown">
         <button class="dropbtn">Category</button>
         <div class="dropdown-category">
-            <a href="#">School</a>
-            <a href="#">Work</a>
-            <a href="#">Household</a>
-            <a href="#">Hobby</a>
-            <a href="#">Others</a>
+            <a asp-action="Deleted" asp-route-category="School">School</a>
+            <a asp-action="Deleted" asp-route-category="Household">House</a>
+            <a asp-action="Deleted" asp-route-category="Work">Work</a>
+            <a asp-action="Deleted" asp-route-category="Hobby">Hobby</a>
+            <a asp-action="Deleted" asp-route-category="Others">Others</a>
         </div>
     </div>
 
     <div class="dropdown">
         <button class="dropbtn">Date Deleted</button>
         <div class="dropdown-due">
-            <a href="#">Newest First</a>
-            <a href="#">Oldest First</a>
+            <a asp-action="Deleted" asp-route-sortOrder="Newest">Newest First</a>
+            <a asp-action="Deleted" asp-route-sortOrder="Oldest">Oldest First</a>
         </div>
     </div>
 </div>
@@ -39,7 +39,8 @@
             <p><strong>Category:</strong> @task.Category</p>
             <p><strong>Date Started:</strong> @task.DateStarted.ToShortDateString()</p>
             <p><strong>Due:</strong> @task.DueDate.ToShortDateString()</p>
-            <p><strong>Date Started:</strong> @task.DateCompleted?.ToShortDateString()</p>
+            <p><strong>Date Completed:</strong> @(task.DateCompleted?.ToShortDateString() ?? "-")</p>
+            <p><strong>Date Deleted:</strong> @(task.DateDeleted?.ToShortDateString() ?? "-")</p>
             <p><strong>Assigned to:</strong> @task.AssignedTo</p>
             <p><strong>Status:</strong> DELETED ✅</p>
 
