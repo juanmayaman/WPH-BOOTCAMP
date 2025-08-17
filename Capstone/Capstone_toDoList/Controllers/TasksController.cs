@@ -12,10 +12,45 @@ namespace Capstone_toDoList.Controllers
         private static List<TaskItem> deleted = new List<TaskItem>();
 
         // Show task list
-        public IActionResult TasksLists()
+        public IActionResult TasksLists(string searchString = null, string priority = null, string category = null, string sortBy = null)
         {
-            return View(tasks); // pass tasks to view
+            var filteredTasks = tasks.AsQueryable();
+
+            // Search filter
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                filteredTasks = filteredTasks.Where(t =>
+                    t.Title.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                    t.Description.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                    t.Category.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                    t.AssignedTo.Contains(searchString, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // Priority filter
+            if (!string.IsNullOrEmpty(priority))
+            {
+                filteredTasks = filteredTasks.Where(t => t.Priority.Equals(priority, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // Category filter
+            if (!string.IsNullOrEmpty(category))
+            {
+                filteredTasks = filteredTasks.Where(t => t.Category.Equals(category, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // Sorting by Due Date
+            if (sortBy == "near")
+            {
+                filteredTasks = filteredTasks.OrderBy(t => t.DueDate);
+            }
+            else if (sortBy == "far")
+            {
+                filteredTasks = filteredTasks.OrderByDescending(t => t.DueDate);
+            }
+
+            return View(filteredTasks.ToList());
         }
+
 
         public IActionResult Completed()
         {
@@ -26,7 +61,7 @@ namespace Capstone_toDoList.Controllers
         {
             return View(deleted); // pass deleted to view
         }
-
+  
 
 
         // Add task
@@ -94,7 +129,7 @@ namespace Capstone_toDoList.Controllers
             // Redirect to Deleted tasks view
             return RedirectToAction("Deleted");
         }
-
+        //SHOW PREVIOUS DATA
         [HttpGet]
         public IActionResult Edit(int taskId)
         {
@@ -107,7 +142,7 @@ namespace Capstone_toDoList.Controllers
 
             return View(task); // pass task to the Edit view
         }
-
+        //EDIT BAGO
         [HttpPost]
         public IActionResult UpdateTask(TaskItem updatedTask)
         {
@@ -131,6 +166,30 @@ namespace Capstone_toDoList.Controllers
             else if (daysLeft <= 4) task.Priority = "High";
             else if (daysLeft <= 8) task.Priority = "Medium";
             else task.Priority = "Low";
+
+            return RedirectToAction("TasksLists");
+        }
+
+        //restore task
+        [HttpPost]
+        public IActionResult RestoreTask(int taskId)
+        {
+            // Find the task in the deleted list
+            var task = deleted.FirstOrDefault(t => t.Id == taskId);
+            if (task == null)
+            {
+                TempData["Error"] = "Task not found in deleted tasks.";
+                return RedirectToAction("Deleted");
+            }
+
+            // Reset completion/deletion properties
+            task.IsCompleted = false;
+            task.DateCompleted = null;
+            task.DateDeleted = null;
+
+            // Remove from deleted and add back to active tasks
+            deleted.Remove(task);
+            tasks.Add(task);
 
             return RedirectToAction("TasksLists");
         }
