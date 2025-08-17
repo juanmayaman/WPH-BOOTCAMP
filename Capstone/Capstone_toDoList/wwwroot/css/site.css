@@ -250,8 +250,8 @@ body {
     font-size: 16px;
     border: none;
     border-radius: 5px;
-    width: 100%;   /* <-- input takes full width of modal */
-    box-sizing: border-box; /* keeps padding inside */
+    width: 100%; 
+    box-sizing: border-box; 
     margin-bottom:10px;
 }
 
@@ -330,7 +330,7 @@ select option {
     box-shadow: 0px 8px 15px rgba(0,0,0,0.15);
 }
 
-/* Card header (title + optional icons) */
+/* Card header */
 .task-card-header {
     display: flex;
     justify-content: space-between;
@@ -369,7 +369,6 @@ select option {
 }
 
 
-/* Optional: truncate long description */
 .task-card p.description {
     display: -webkit-box;
     -webkit-line-clamp: 4;
@@ -382,6 +381,7 @@ select option {
     .grid-container {
         grid-template-areas:
             "header"
+            "sidebar"
             "main"
             "nav"
             "footer";
@@ -409,6 +409,7 @@ select option {
     .grid-container {
         grid-template-areas:
             "header"
+            "sidebar"
             "main"
             "footer";
         grid-template-columns: 1fr;
