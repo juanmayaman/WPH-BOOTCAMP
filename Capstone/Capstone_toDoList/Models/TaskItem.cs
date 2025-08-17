@@ -10,8 +10,8 @@
         public bool IsCompleted { get; set; } // Status
         public DateTime DateStarted { get; set; } // When the task was started
         public DateTime DueDate { get; set; }
-        public DateTime DateCompleted { get; set; }
-        public DateTime DateDeleted { get; set; }
+        public DateTime? DateCompleted { get; set; }
+        public DateTime? DateDeleted { get; set; }
         public string AssignedTo { get; set; } // Name of person responsible
     }
 }
