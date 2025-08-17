@@ -21,7 +21,7 @@
         <div class="dropdown-prio">
             <a asp-action="TasksLists" asp-route-priority="Critical">Critical</a>
             <a asp-action="TasksLists" asp-route-priority="High">High</a>
-            <a asp-action="TasksLists" asp-route-priority="Medium">Medium</a>
+            <a asp-action="TasksLists" asp-route-priority="Medium">Med</a>
             <a asp-action="TasksLists" asp-route-priority="Low">Low</a>
         </div>
     </div>
@@ -138,7 +138,7 @@
                     <span style="color:@(
                           task.Priority == "Critical" ? "red" :
                           task.Priority == "High" ? "orange" :
-                          task.Priority == "Medium" ? "#FFD700" :  
+                          task.Priority == "Med" ? "#FFD700" :  
                           "green" 
                 )">
                     @task.Priority
