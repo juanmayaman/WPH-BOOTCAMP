@@ -71,6 +71,42 @@
         </div>
  </div>
 
+<!-- SINGLE EDIT TASK MODAL -->
+<div id="editTaskModal" class="modal">
+    <div class="modal-content">
+        <span id="editModalClose" class="close">&times;</span>
+        <form asp-action="UpdateTask" method="post">
+            <input type="hidden" id="editTaskId" name="Id" />
+
+            <label>Title:</label>
+            <input type="text" id="editTitle" name="Title" required />
+
+            <label>Description:</label>
+            <textarea id="editDescription" name="Description"></textarea>
+
+            <label>Category:</label>
+            <select id="editCategory" name="Category" required>
+                <option value="School">School</option>
+                <option value="Work">Work</option>
+                <option value="Household">Household</option>
+                <option value="Hobby">Hobby</option>
+                <option value="Others">Others</option>
+            </select>
+
+            <label>Due Date:</label>
+            <input type="date" id="editDueDate" name="DueDate" required />
+
+            <label>Assigned To:</label>
+            <input type="text" id="editAssignedTo" name="AssignedTo" />
+
+            <div class="button-group">
+                <button type="submit" class="confirm">Update Task</button>
+                <button type="button" class="close" id="editCancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 
 
 <!-- Task list display -->
@@ -110,10 +146,16 @@
                 </form>
 
                 <!-- Edit button -->
-                <form asp-action="Edit" method="get">
-                    <input type="hidden" name="id" value="@task.Id" />
-                    <button type="submit" style="background-color:#1e1e2f;" id="editTask">Edit</button>
-                </form>
+                <button type="button" class="editBtn"
+                        style="background-color:#1e1e2f;"
+                        data-id="@task.Id"
+                        data-title="@task.Title"
+                        data-description="@task.Description"
+                        data-category="@task.Category"
+                        data-duedate="@task.DueDate.ToString("yyyy-MM-dd")"
+                        data-assigned="@task.AssignedTo">
+                    Edit
+                </button>
 
                 <!-- Delete button -->
                 <form asp-action="Delete" method="post">
@@ -122,43 +164,6 @@
                 </form>
             </div>
 
-             <!--POP UP FOR EDITING OF TASKS-->
-            <div id="editTaskModal"
-                 class="modal">
-                <div class="modal-content">
-                    <span id="x-button" class="close">&times;</span>
-                    <form asp-action="UpdateTask" method="post">
-                        <input type="hidden" name="Id" value="@task.Id" />
-
-                        <label>Title:</label>
-                        <input type="text" name="Title" value="@task.Title" required />
-
-                        <label>Description:</label>
-                        <textarea name="Description">@task.Description</textarea>
-
-                        <label>Category:</label>
-                        <select name="Category" required>
-                            <option value="School" @(task.Category=="School" ? "selected":"")>School</option>
-                            <option value="Work" @(task.Category=="Work" ? "selected":"")>Work</option>
-                            <option value="Household" @(task.Category=="Household" ? "selected":"")>Household</option>
-                            <option value="Hobby" @(task.Category=="Hobby" ? "selected":"")>Hobby</option>
-                            <option value="Others" @(task.Category=="Others" ? "selected":"")>Others</option>
-                        </select>
-
-                        <label>Due Date:</label>
-                        <input type="date" name="DueDate" value="@task.DueDate.ToString("yyyy-MM-dd")" required />
-
-                        <label>Assigned To:</label>
-                        <input type="text" name="AssignedTo" value="@task.AssignedTo" />
-
-
-                        <div class="button-group">
-                            <button type="submit">Update Task</button>
-                            <button type="button" class="close">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
      </div>}
 </div>
 
