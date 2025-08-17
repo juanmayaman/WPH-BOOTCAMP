@@ -32,7 +32,7 @@ editBtns.forEach(btn => {
 // Close Edit Task modal when clicking X or Cancel
 editClose.onclick = editCancel.onclick = () => editModal.style.display = "none";
 
-// Close modal when clicking outside (works for both Add and Edit)
+// Close modal when clicking outside 
 window.onclick = (event) => {
     if (event.target == addModal) addModal.style.display = "none";
     if (event.target == editModal) editModal.style.display = "none";
