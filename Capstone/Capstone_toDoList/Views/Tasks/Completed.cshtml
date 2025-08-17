@@ -36,7 +36,7 @@
             <p><strong>Category: </strong>@task.Category</p>
             <p><strong>Date Started:</strong> @task.DateStarted.ToShortDateString()</p>
             <p><strong>Due:</strong> @task.DueDate.ToShortDateString()</p>
-            <p><strong>Date Completed:</strong> @task.DateCompleted.ToShortDateString()</p>
+            <p><strong>Date Completed:</strong> @task.DateCompleted?.ToShortDateString()</p>
             <p><strong>Assigned to:</strong> @task.AssignedTo</p>
             <p><strong>Status: </strong>@(task.IsCompleted ? "Done ✅" : "Pending ⏳")</p>
 

@@ -5,30 +5,44 @@
 <!--NEED I ADD FUCNTIONALITIES NG MGA FILTERS-->
 <h1 style="margin-bottom:0">Tasks List</h1>
 <div class="task-lists-header">
+
+    <!-- Search -->
+        <form asp-action="TasksLists" method="get">
+            <input class="search-box" type="text" name="searchString"
+                   placeholder="Search tasks..."
+                   value="@Context.Request.Query["searchString"]" />
+            <button type="submit" class="dropbtn">Search</button>
+        </form>
+    
+
+    <!-- Priority -->
     <div class="dropdown">
-      <button class="dropbtn">Priority</button>
-      <div class="dropdown-prio">
-        <a href="#">Critical</a>
-        <a href="#">High</a>
-        <a href="#">Medium</a>
-        <a href="#">Low</a>
-      </div>
-    </div>
-    <div class="dropdown">
-      <button class="dropbtn">Category</button>
-      <div class="dropdown-category">
-        <a href="#">School</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-      </div>
+        <button class="dropbtn">Priority</button>
+        <div class="dropdown-prio">
+            <a asp-action="TasksLists" asp-route-priority="Critical">Critical</a>
+            <a asp-action="TasksLists" asp-route-priority="High">High</a>
+            <a asp-action="TasksLists" asp-route-priority="Medium">Medium</a>
+            <a asp-action="TasksLists" asp-route-priority="Low">Low</a>
+        </div>
     </div>
 
+    <!-- Category -->
     <div class="dropdown">
-      <button class="dropbtn">Due Date</button>
-      <div class="dropdown-due">
-        <a href="#">Near -> Far</a>
-        <a href="#">Far -> Near</a>
-      </div>
+        <button class="dropbtn">Category</button>
+        <div class="dropdown-category">
+            <a asp-action="TasksLists" asp-route-category="School">School</a>
+            <a asp-action="TasksLists" asp-route-category="Work">Work</a>
+            <a asp-action="TasksLists" asp-route-category="Personal">Personal</a>
+        </div>
+    </div>
+
+    <!-- Due Date -->
+    <div class="dropdown">
+        <button class="dropbtn">Due Date</button>
+        <div class="dropdown-due">
+            <a asp-action="TasksLists" asp-route-sortBy="near">Near → Far</a>
+            <a asp-action="TasksLists" asp-route-sortBy="far">Far → Near</a>
+        </div>
     </div>
 
     <button id="addTaskBtn">Add Task</button>
@@ -158,7 +172,7 @@
                 </button>
 
                 <!-- Delete button -->
-                <form asp-action="Delete" method="post">
+                <form asp-action="DeleteTask" method="post">
                     <input type="hidden" name="taskId" value="@task.Id" />
                     <button type="submit" class="close">Delete</button>
                 </form>
