@@ -376,3 +376,83 @@ select option {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+/* For tablets and smaller desktops */
+@media (max-width: 1024px) {
+    .grid-container {
+        grid-template-areas:
+            "header"
+            "main"
+            "nav"
+            "footer";
+        grid-template-columns: 1fr;
+    }
+
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .main-nav ul {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+
+    .grid-container {
+        grid-template-areas:
+            "header"
+            "main"
+            "footer";
+        grid-template-columns: 1fr;
+    }
+
+    .side-nav {
+        display: none; /* hide sidebar on mobile */
+    }
+
+    .task-lists-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+        .task-lists-header form {
+            width: 100%;
+        }
+
+    .search-box {
+        flex: unset;
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .CRUD-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* For very small devices (phones <480px) */
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .task-card {
+        min-height: 200px;
+        padding: 10px;
+    }
+
+    .CRUD-buttons button {
+        min-width: auto;
+        width: 100%;
+    }
+}
