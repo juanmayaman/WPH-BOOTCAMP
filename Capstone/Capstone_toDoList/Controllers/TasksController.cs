@@ -20,10 +20,10 @@ namespace Capstone_toDoList.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 filteredTasks = filteredTasks.Where(t =>
-                    t.Title.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                    t.Description.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                    t.Category.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                    t.AssignedTo.Contains(searchString, StringComparison.OrdinalIgnoreCase));
+                    (t.Title ?? "").Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                    (t.Description ?? "").Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                    (t.Category ?? "").Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                    (t.AssignedTo ?? "").Contains(searchString, StringComparison.OrdinalIgnoreCase));
             }
 
             // Priority filter
@@ -52,16 +52,57 @@ namespace Capstone_toDoList.Controllers
         }
 
 
-        public IActionResult Completed()
+        public IActionResult Completed(string category = null, string sortOrder = null)
         {
-            return View(completed); // pass completed tasks to view
+            var completedTasks = completed.AsEnumerable();
+
+            // Filter by category
+            if (!string.IsNullOrEmpty(category))
+            {
+                completedTasks = completedTasks
+                    .Where(t => t.Category.Equals(category, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // Sort by completion date
+            if (sortOrder == "Newest First")
+            {
+                completedTasks = completedTasks
+                    .OrderByDescending(t => t.DateCompleted ?? DateTime.MinValue);
+            }
+            else if (sortOrder == "Oldest First")
+            {
+                completedTasks = completedTasks
+                    .OrderBy(t => t.DateCompleted ?? DateTime.MaxValue);
+            }
+
+            return View(completedTasks.ToList());
         }
 
-        public IActionResult Deleted()
+        public IActionResult Deleted(string category = null, string sortOrder = null)
         {
-            return View(deleted); // pass deleted to view
+            var deletedTasks = deleted.AsEnumerable();
+
+            // filter by category
+            if (!string.IsNullOrEmpty(category))
+            {
+                deletedTasks = deletedTasks.Where(t => t.Category.Equals(category, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // sort by DateDeleted 
+            if (sortOrder == "Newest First")
+            {
+                deletedTasks = deletedTasks
+                    .OrderByDescending(t => t.DateDeleted ?? DateTime.MinValue);
+            }
+            else if (sortOrder == "Oldest First")
+            {
+                deletedTasks = deletedTasks
+                    .OrderBy(t => t.DateDeleted ?? DateTime.MaxValue);
+            }
+
+            return View(deletedTasks.ToList());
         }
-  
+
 
 
         // Add task
@@ -76,7 +117,7 @@ namespace Capstone_toDoList.Controllers
             }
             task.Id = tasks.Count + 1;
             task.IsCompleted = false;
-            task.DateStarted = DateTime.Today; //started date
+            task.DateStarted = DateTime.Today;
 
             //priority
             var daysLeft = (task.DueDate - DateTime.Today).Days;
@@ -93,7 +134,6 @@ namespace Capstone_toDoList.Controllers
         [HttpPost]
         public IActionResult CompleteTask(int taskId)
         {
-            // Find the task by Id
             var task = tasks.FirstOrDefault(t => t.Id == taskId);
 
             // Mark as completed
@@ -103,7 +143,6 @@ namespace Capstone_toDoList.Controllers
             tasks.Remove(task);
             completed.Add(task);
 
-            // Redirect to Tasks list or Completed tasks view
             return RedirectToAction("Completed");
         }
 
@@ -111,7 +150,6 @@ namespace Capstone_toDoList.Controllers
         [HttpPost]
         public IActionResult DeleteTask(int taskId)
         {
-            // Find the task
             var task = tasks.FirstOrDefault(t => t.Id == taskId);
             if (task == null)
             {
@@ -122,11 +160,9 @@ namespace Capstone_toDoList.Controllers
             // Set deleted date
             task.DateDeleted = DateTime.Now;
 
-            // Move to deleted list
             tasks.Remove(task);
             deleted.Add(task);
 
-            // Redirect to Deleted tasks view
             return RedirectToAction("Deleted");
         }
         //SHOW PREVIOUS DATA
@@ -160,7 +196,6 @@ namespace Capstone_toDoList.Controllers
             task.DueDate = updatedTask.DueDate;
             task.AssignedTo = updatedTask.AssignedTo;
 
-            // Optional: update priority based on DueDate
             var daysLeft = (task.DueDate - DateTime.Today).Days;
             if (daysLeft <= 1 && daysLeft >= 0) task.Priority = "Critical";
             else if (daysLeft <= 4) task.Priority = "High";
@@ -174,20 +209,17 @@ namespace Capstone_toDoList.Controllers
         [HttpPost]
         public IActionResult RestoreTask(int taskId)
         {
-            // Find the task in the deleted list
             var task = deleted.FirstOrDefault(t => t.Id == taskId);
             if (task == null)
             {
                 TempData["Error"] = "Task not found in deleted tasks.";
                 return RedirectToAction("Deleted");
             }
-
-            // Reset completion/deletion properties
             task.IsCompleted = false;
             task.DateCompleted = null;
             task.DateDeleted = null;
 
-            // Remove from deleted and add back to active tasks
+
             deleted.Remove(task);
             tasks.Add(task);
 
